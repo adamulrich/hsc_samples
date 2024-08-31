@@ -1,0 +1,52 @@
+Web App Requirements for HSC
+
+Executive Summary
+HSC needs a replacement for a deprecated application that they use to gather information about samples collected in the field. Sample data includes location, date/time, duration, sample id number, name/process. 
+
+Requirements
+
+We create a project, which is a collection of samples for specific site for a period of time.
+We would like to edit information.
+Want to use the camera to read the bar code. 
+	Change/delete/edit all info.
+
+Badge Types/ Analysis requests. 
+1.	Organic Vapor 564
+    a.	Acetone
+    b.	Xylene
+    c.	Methanol
+    d.	Ethanol
+2.	Aldehyde 581 / 571
+    a.	Glutaraldehyde
+    b.	Formaldehyde (50-0-0)
+3.	Acetic Acid – 543A
+    a.	Acetic Acid - (64-19-7)
+4.	Hydrogen Peroxide
+    a.	Hydrogen Peroxide - (7722-84-1)
+5.	Nitrous Oxide – 575D
+    a.	Nitrous Oxide – (10024-97-2)
+6.	Halogenated Gases – 574A
+    a.	Sevoflurane – (28523-86-6)
+    b.	Isoflurane – (26675-46-7)
+    c.	Desflurane – (57041-67-5)
+
+
+Project Data
+•	Project Name
+•	Project comments
+Sample Data
+•	Sample ID
+•	QR Code
+•	Date collected
+•	Duration
+•	Analysis requests
+
+
+Create pdf 
+
+https://github.com/parallax/jsPDF
+https://stackoverflow.com/questions/18191893/generate-pdf-from-html-in-div-using-javascript 
+https://github.com/simonbengtsson/jsPDF-AutoTable 
+
+Read qr code 
+https://minhazav.medium.com/qr-and-barcode-scanner-using-html-and-javascript-2cdc937f793d
