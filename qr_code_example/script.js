@@ -15,7 +15,9 @@ domReady(function () {
 
     // If found you qr code
     function onScanSuccess(decodeText, decodeResult) {
-        alert("You Qr is : " + decodeText, decodeResult);
+        // decode text is what we want here for the badge ID.
+        alert("You Qr is : " + decodeText + "," + decodeResult);
+        return 
     }
 
     let htmlscanner = new Html5QrcodeScanner(
