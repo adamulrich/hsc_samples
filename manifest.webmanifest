@@ -1,0 +1,20 @@
+{
+    "name": "HSC Samples App",
+    "short_name": "HSC Samples",
+    "description": "Application for collecting data for project and samples",
+    "scope": "/hsc_samples/",
+    "start_url": "/hsc_samples",
+   
+    "background_color": "#ffffff",
+    "theme_color": "#ffffff",
+   
+    "display": "standalone", 
+   
+    "icons": [
+        {
+          "src": "images/icon.png",
+          "type": "image/png",
+          "sizes": "700x700"
+        }
+    ]
+  }
