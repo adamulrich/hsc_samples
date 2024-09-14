@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../scripts/parse.min.js"></script>
+
+    <script>
+        // Initialize Parse
+        Parse.initialize("2c1IS8eo1qhrDLNUvAT07SnuTQ6YraMLJs5Oclao", "YhiJCM9Vnh9WDwRmT1D1LmqfQbE4VNjvCK2bXRj7"); //PASTE HERE YOUR Back4App APPLICATION ID AND YOUR JavaScript KEY
+        Parse.serverURL = "https://parseapi.back4app.com/";
+    
+    
+        async function get_analysis_requests() {
+
+            // Assume ParseObject myPost was previously created.
+            const requests = Parse.Object.extend("Analysis_Requests");
+            const query = new Parse.Query(requests);
+            
+            const count = await query.find();
+            for (x of count) {
+                const main = document.getElementById("main");
+                main.innerText += x.get("Analysis_Type")
+            }
+
+        }
+
+        async function create_project() {
+            
+            var project_template = Parse.Object.extend("Project");
+
+            const project = {};
+            project.id = "KDMC 2024"
+            project.date = new Date("8/28/2024")
+            project.samples = []
+            sample1 = {}
+            sample1.client_sample_id = "OR 1"
+            sample1.media_type = "575D"
+            sample1.serial_number = "QT02560"
+            sample1.date = "08-28-2024"
+            sample1.total_time = "480"
+            sample1.tests = ["5a"]
+
+            sample2 = {}
+            sample2.client_sample_id = "OR 1"
+            sample2.media_type = "574A"
+            sample2.serial_number = "QK12695"
+            sample2.date = "08-28-2024"
+            sample2.total_time = "480"
+            sample2.tests = ["6a","6b","6c"]
+
+            project.samples.push(sample1, sample2)
+        
+            p = new project_template();
+
+            p.set('Name',project.id);
+            p.set('Date', project.date);
+            p.set('data', project);
+            p = await p.save();
+
+        }
+
+        function read_project() {
+            var project_template = Parse.Object.extend("Project");
+            query = new Parse.Query(project_template);
+            query.equalTo("Name","KDMC 2025");
+            query.first().then(function(p) {
+                if(p) {
+                    current_project = p.get('data');
+                    console.log(current_project);
+                    console.log(current_project.samples);
+                }
+            })
+            
+        }
+
+        //     const query = new Parse.Query("Analysis_Requests");
+        //     try {
+        //         const analyses = await query.get("SHsv1NCgyb");
+        //         const main = document.getElementById("main");
+        //         main.innerText = analyses.get("Analysis_Type");
+        //     }
+        //     catch (error) {}
+        // }
+    
+        
+    </script>
+</head>
+<body>
+    <button onclick="get_analysis_requests()">get_analysis_requests</button>
+    <button onclick="create_project()">create project</button>
+    <button onclick="read_project()">read project</button>
+    <main id="main">
+        nothing yet.
+    </main>
+</body>
+</html>
+
