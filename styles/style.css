@@ -1,11 +1,12 @@
-#home-container {
-    width: 400px;
-  }
-
 .input {
   width: 90%;
 }
 
 body {
-  margin-left: 10px;
+  width: 380px;
+  margin: 0 auto
+}
+
+.content-center{
+  margin:0 auto;
 }
