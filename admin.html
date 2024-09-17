@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/admin.js"></script>
+    <title>Document</title>
+</head>
+<body onload="javascript:load_data()">
+    <header>
+        <div class="container text-center mb-3">
+            <h1>Company Information</h1>          
+            <img src="images/icon.png" alt="" width="100px" height="100px">
+        </div>
+    </header>
+    <main>
+        <div class="container text-center mb-3">
+            <div class="row mb-3">
+                <label for="person-name" class="label">Sampler Name</label>
+                <input id="person-name" class="input" type="text">
+            </div>
+            <div class="row mb-3">
+                <label for="person-email" class="label">Sampler Email</label>
+                <input id="person-email" class="input" type="text">
+            </div>
+            <div class="row mb-3">
+                <label for="company-name" class="label">Company Name</label>
+                <input id="company-name" class="input" type="text">
+            </div>
+            <div class="row mb-3">
+                <label for="company-address" class="label">Address</label>
+                <input id="company-address" class="input" type="text">
+            </div>
+            <div class="row mb-3">
+                <label for="company-city" class="label">City</label>
+                <input id="company-city" class="input" type="text">
+            </div>
+            <div class="row mb-3">
+                <label for="company-state" class="label">State</label>
+                <input id="company-state" class="input" type="text">
+            </div>
+            <div class="row mb-3">
+                <label for="company-zip" class="label">Zip</label>
+                <input id="company-zip" class="input" type="text">
+            </div>
+            <div class="row mb-3">
+                <label for="company-phone" class="label">Phone</label>
+                <input id="company-phone" class="input" type="text">
+            </div>
+
+            <div class="container text-center mb-3">
+                <button class="btn btn-success" onclick="save_close()">Save</button>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
