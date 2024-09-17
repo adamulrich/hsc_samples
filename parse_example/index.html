@@ -9,6 +9,7 @@
 
     <script>
         // Initialize Parse
+        // These keys are public keys. Need to secure the backend with user creds and what they can do
         Parse.initialize("2c1IS8eo1qhrDLNUvAT07SnuTQ6YraMLJs5Oclao", "YhiJCM9Vnh9WDwRmT1D1LmqfQbE4VNjvCK2bXRj7"); //PASTE HERE YOUR Back4App APPLICATION ID AND YOUR JavaScript KEY
         Parse.serverURL = "https://parseapi.back4app.com/";
     
@@ -76,6 +77,30 @@
             
         }
 
+
+        async function create_user() {
+            // Creates a new Parse "User" object, which is created by default in your Parse app
+            let user = new Parse.User();
+            // Set the input values to the new "User" object
+            user.set("username", "amu");
+            user.set("email", "adamulrich@hotmail.com");
+            user.set("password", 'test');
+            // Call the save method, which returns the saved object if successful
+            user = await user.save();
+
+        }
+
+        function log_in() {
+            // Create a new instance of the user class
+            var user = Parse.User
+                .logIn("amu", "test").then(function(user) {
+                    console.log('login successful');
+            }).catch(function(error){
+                console.log("Error: " + error.code + " " + error.message);
+            });
+        }
+
+
         //     const query = new Parse.Query("Analysis_Requests");
         //     try {
         //         const analyses = await query.get("SHsv1NCgyb");
@@ -92,6 +117,8 @@
     <button onclick="get_analysis_requests()">get_analysis_requests</button>
     <button onclick="create_project()">create project</button>
     <button onclick="read_project()">read project</button>
+    <!-- <button onclick="create_user()">create user</button> -->
+    <button onclick="log_in()">log in</button>
     <main id="main">
         nothing yet.
     </main>
