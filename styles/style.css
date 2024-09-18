@@ -1,5 +1,6 @@
-.input {
-  width: 90%;
+select, input {
+  width: 100%;
+  margin: 0 auto;
 }
 
 body {
@@ -9,4 +10,14 @@ body {
 
 .content-center{
   margin:0 auto;
+}
+
+label {
+  font-weight: bold;
+  text-align: left;
+  margin-left: 5%;
+}
+
+select {
+  margin-bottom: 7px;
 }

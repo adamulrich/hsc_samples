@@ -21,7 +21,7 @@ Badge Types/ Analysis requests.
     b.	Formaldehyde (50-0-0)
 3.	Acetic Acid – 543A
     a.	Acetic Acid - (64-19-7)
-4.	Hydrogen Peroxide
+4.	Hydrogen Peroxide - 587
     a.	Hydrogen Peroxide - (7722-84-1)
 5.	Nitrous Oxide – 575D
     a.	Nitrous Oxide – (10024-97-2)

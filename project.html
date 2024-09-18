@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/project.js"></script>
+    <title>Document</title>
+</head>
+<body class="content-center" onload="javascript:load_data()">
+    <header>
+        <div class="container text-center mb-3">
+            <h1>Company Information</h1>          
+            <img src="images/icon.png" alt="" width="100px" height="100px">
+        </div>
+    </header>
+    <main>
+        <div class="container text-center mb-3">
+            <div class="row mb-3">
+                <label for="project-name" class="label">Project Name</label>
+                <input id="project-name" class="input" type="text">
+            </div>
+            <div class="row mb-3">
+                <label for="project-comments" class="label">Comments</label>
+                <input id="project-comments" class="input" type="text">
+            </div>
+            <div class="container text-center mb-3">
+                <button class="btn btn-success" onclick="addNewSample()">New Sample</button>
+            </div>
+        </div>
+        <div id="samples" class="container text-center mb-3">
+            <div class="container" id="sample-1">
+                <div class="row mb-3">
+                    <div class="col-sm">
+                        <label for="sample1-date" class="label">Date</label>
+                        <input id="sample1-date" class="input" type="date" value="2024-09-17">    
+                    </div>
+                    <div class="col-sm">
+                        <label for="sample1-id" class="label">ID</label>
+                        <input id="sample1-id" class="input" type="text">    
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md">
+                        <label for="sample1-type" class="label">Type</label>
+                        <select class="select" id="sample1-type">
+                            <option>564 Organic Vapor</option> 
+                            <option>581/571 Aldehyde</option> 
+                            <option>543A Acetic Acid</option> 
+                            <option>587 Hydrogen Peroxide</option> 
+                            <option>575D Nitrous Oxide</option> 
+                            <option>574A Halogenated Gases</option> 
+                        </select>
+                    </div>
+                    <div class="col-sm">
+                        <div class="row">
+                            <div class="col-md">
+                                <label for="sample1-serial-number" class="label">Serial No</label>
+                            </div>
+                            <div class="col-sm">
+                                <button class="btn btn-outline-primary btn-sm">📷</button>
+                            </div>
+                        </div>
+                        <input id="sample1-serial-number" class="input" type="text">
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
+    </main>
+</body>
+</html>
