@@ -7,6 +7,10 @@ currentData.samples = [];
 // load data from local storage
 function addNewSample() {
     document.getElementById("sampleFormDiv").style.display = "block";
+    var v = document.getElementById("sample1-type").value;
+    let currentDate = new Date().toJSON().slice(0, 10);
+    document.getElementById("sample1-date").value=currentDate;
+    updateAnalyses(v);
 }
   
 function closeForm() {
@@ -15,8 +19,7 @@ function closeForm() {
 
 function updateSampleCollectionData() {
     
-    // get data from form and put into an object. 
-    console.log("test");
+    // get data from form and put into an object.
     newSample = {}
 
     newSample.date = document.getElementById("sample1-date").value;
