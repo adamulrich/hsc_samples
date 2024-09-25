@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/project.css">
     <script src="scripts/bootstrap.min.js"></script>
     <script src="scripts/project.js"></script>
     <title>Document</title>
@@ -12,7 +13,7 @@
 <body class="content-center" onload="javascript:load_data()">
     <header>
         <div class="container text-center mb-3">
-            <h1>Company Information</h1>          
+            <h1>Project Information</h1>          
             <img src="images/icon.png" alt="" width="100px" height="100px">
         </div>
     </header>
@@ -26,10 +27,30 @@
                 <label for="project-comments" class="label">Comments</label>
                 <input id="project-comments" class="input" type="text">
             </div>
+            <div class="sample-table">
+                <table id="sample-table">
+                    <tr>
+                        <th>#</th>
+                        <th>date</th>
+                        <th>id</th>
+                        <th>type</th>
+                        <th>serial #</th>
+                        <th>duration</th>
+                        <th colspan="2"> </th>
+                    </tr>
+                </table>
+            </div>
             <div class="container text-center mb-3">
                 <button class="btn btn-success" onclick="addNewSample()">New Sample</button>
             </div>
         </div>
+
+    </main>
+    <!-- <button class="open-button btn btn-primary" onclick="openForm()">Create Sample</button> -->
+
+    <div class="form-popup" id="sampleFormDiv">
+    <form action="#" id="sampleForm" class="form-container">
+
         <div id="samples" class="container text-center mb-3">
             <div class="container" id="sample-1">
                 <div class="row mb-3">
@@ -37,6 +58,8 @@
                         <label for="sample1-date" class="label">Date</label>
                         <input id="sample1-date" class="input" type="date" value="2024-09-17">    
                     </div>
+                </div>
+                <div class="row mb-3">
                     <div class="col-sm">
                         <label for="sample1-id" class="label">ID</label>
                         <input id="sample1-id" class="input" type="text">    
@@ -54,22 +77,41 @@
                             <option>574A Halogenated Gases</option> 
                         </select>
                     </div>
+                </div>
+                <div class="row mb-3">
                     <div class="col-sm">
                         <div class="row">
                             <div class="col-md">
                                 <label for="sample1-serial-number" class="label">Serial No</label>
                             </div>
+                        </div> 
+                        <div class="row mb-3">
                             <div class="col-sm">
-                                <button class="btn btn-outline-primary btn-sm">📷</button>
+                                <button class="btn btn-outline-primary btn-camera">📷</button>
                             </div>
                         </div>
                         <input id="sample1-serial-number" class="input" type="text">
                     </div>
-                    
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm">
+                        <label for="sample1-duration" class="label">duration</label>
+                        <input id="sample1-duration" class="input" type="text">    
+                    </div>
                 </div>
             </div>
-
         </div>
-    </main>
+        <div class="row mb-3">
+            <button type="dialog" class="btn btn-success" onclick="updateSampleCollectionData()">Create</button>
+        </div>
+        <div class="row mb-3">
+            <button type="button" class="btn cancel btn-danger" onclick="closeForm()">cancel</button>
+        </div>
+    </form>
+    </div>
+
+    <script>
+        </script>
+
 </body>
 </html>
