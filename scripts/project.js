@@ -3,6 +3,7 @@ var currentData = {};
 currentData.Project = "test project";
 currentData.samples = [];
 
+
 // load data from local storage
 function addNewSample() {
     document.getElementById("sampleFormDiv").style.display = "block";
@@ -60,13 +61,26 @@ function updateSampleCollectionData() {
   }
 
 
-  function deleteRow(r) {
+function deleteRow(r) {
     var i = r.parentNode.parentNode.rowIndex;
     document.getElementById("sample-table").deleteRow(i);
     currentData.samples.splice(i-1,1);
     console.log(currentData);
-  }
+}
 
+function updateAnalyses(value) {
+    var select = document.getElementById("sample1-analyses");
+    for (i of select.children) {
+        if (i.className == value) {
+            i.style.display = "block";
+        } else {
+            i.style.display = "none";
+        }
+    }
+}
+
+var v = document.getElementById("sample1-type").value;
+updateAnalyses(v);
 
 // example code for loading/storing data from/in localStorage
 

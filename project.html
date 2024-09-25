@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/project.css">
     <script src="scripts/bootstrap.min.js"></script>
-    <script src="scripts/project.js"></script>
+    <script src="scripts/project.js" defer></script>
     <title>Document</title>
 </head>
 <body class="content-center" onload="javascript:load_data()">
@@ -68,13 +68,13 @@
                 <div class="row mb-3">
                     <div class="col-md">
                         <label for="sample1-type" class="label">Type</label>
-                        <select class="select" id="sample1-type">
-                            <option>564 Organic Vapor</option> 
-                            <option>581/571 Aldehyde</option> 
-                            <option>543A Acetic Acid</option> 
-                            <option>587 Hydrogen Peroxide</option> 
-                            <option>575D Nitrous Oxide</option> 
-                            <option>574A Halogenated Gases</option> 
+                        <select class="select" id="sample1-type" onchange="updateAnalyses(this.value)">
+                            <option>564-Organic-Vapor</option> 
+                            <option>581-571-Aldehyde</option> 
+                            <option>543A-Acetic-Acid</option> 
+                            <option>587-Hydrogen-Peroxide</option> 
+                            <option>575D-Nitrous-Oxide</option> 
+                            <option>574A-Halogenated-Gases</option> 
                         </select>
                     </div>
                 </div>
@@ -103,18 +103,18 @@
                     <div class="col-md">
                         <label for="sample1-analyses" class="label">Type</label>
                         <select class="select" id="sample1-analyses" multiple>
-                            <option class="564 Organic Vapor">Acetone</option> 
-                            <option class="564 Organic Vapor">Xylene</option> 
-                            <option class="564 Organic Vapor">Methanol</option> 
-                            <option class="564 Organic Vapor">Ethanol</option> 
-                            <option class="581/571 Aldehyde" hidden>Glutaraldehyde</option> 
-                            <option class="581/571 Aldehyde" hidden>Formaldehyde (50-0-0)</option> 
-                            <option class="543A Acetic Acid" hidden>Acetic Acid - (64-19-7)</option> 
-                            <option class="587 Hydrogen Peroxide" hidden>Hydrogen Peroxide - (7722-84-1)</option> 
-                            <option class="575D Nitrous Oxide" hidden>Nitrous Oxide – (10024-97-2)</option> 
-                            <option class="574A Halogenated Gases" hidden>Sevoflurane – (28523-86-6)</option> 
-                            <option class="574A Halogenated Gases" hidden>Isoflurane – (26675-46-7)</option> 
-                            <option class="574A Halogenated Gases" hidden>Desflurane – (57041-67-5)</option> 
+                            <option class="564-Organic-Vapor">Acetone</option> 
+                            <option class="564-Organic-Vapor">Xylene</option> 
+                            <option class="564-Organic-Vapor">Methanol</option> 
+                            <option class="564-Organic-Vapor">Ethanol</option> 
+                            <option class="581-571-Aldehyde" >Glutaraldehyde</option> 
+                            <option class="581-571-Aldehyde" >Formaldehyde (50-0-0)</option> 
+                            <option class="543A-Acetic-Acid" >Acetic Acid - (64-19-7)</option> 
+                            <option class="587-Hydrogen-Peroxide" >Hydrogen Peroxide - (7722-84-1)</option> 
+                            <option class="575D-Nitrous-Oxide" >Nitrous Oxide – (10024-97-2)</option> 
+                            <option class="574A-Halogenated-Gases" >Sevoflurane – (28523-86-6)</option> 
+                            <option class="574A-Halogenated-Gases" >Isoflurane – (26675-46-7)</option> 
+                            <option class="574A-Halogenated-Gases" >Desflurane – (57041-67-5)</option> 
                             
                         </select>
                     </div>
