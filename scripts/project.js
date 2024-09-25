@@ -70,7 +70,7 @@ function deleteRow(r) {
 
 function updateAnalyses(value) {
     var select = document.getElementById("sample1-analyses");
-
+    select.value = "";
     for (i of select.children) {
         i.checked = false;
         if (i.className == value) {
