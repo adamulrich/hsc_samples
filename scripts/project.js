@@ -27,7 +27,12 @@ function updateSampleCollectionData() {
     newSample.type = document.getElementById("sample1-type").value;
     newSample.serialNumber = document.getElementById("sample1-serial-number").value;
     newSample.duration = document.getElementById("sample1-duration").value;
+    newSample.analyses = []
 
+    const analysesSelect = document.getElementById("sample1-analyses");
+    for (let i = 0;i < analysesSelect.selectedOptions.length; i++) {
+        newSample.analyses.push(analysesSelect.selectedOptions[i].label)
+    }
 
     // add object to currentData
     currentData.samples.push(newSample);
@@ -38,20 +43,22 @@ function updateSampleCollectionData() {
     var newRow = document.getElementById("sample-table").insertRow(-1);
     var count = newRow.insertCell(0);
     count.innerText = currentData.samples.length;
-    var date = newRow.insertCell(1);
-    date.innerText = newSample.date;
-    var id = newRow.insertCell(2);
-    id.innerText = newSample.id;
-    var type = newRow.insertCell(3);
-    type.innerText = newSample.type;
-    var serialNumber = newRow.insertCell(4);
-    serialNumber.innerText = newSample.serialNumber;
-    var duration = newRow.insertCell(5);
-    duration.innerText = newSample.duration;
-    var editCell = newRow.insertCell(6);
+    var date_id_duration = newRow.insertCell(1);
+    date_id_duration.innerHTML = newSample.date + "<br>" + newSample.id + "<br>" +
+        newSample.duration;
+    var type_serial = newRow.insertCell(2);
+    type_serial.innerHTML = newSample.type + "<br>" + newSample.serialNumber;
+
+    var analyses = newRow.insertCell(3);
+    for (let i = 0; i < newSample.analyses.length; i++ ) {
+        analyses.innerHTML += newSample.analyses[i] + "<br>";
+    }
+
+    // edit/delete buttons
+    var editCell = newRow.insertCell(4);
     editCell.innerHTML=`
     <input type="button" class="" value="✏️" onclick="editRow(this)">`
-    var deleteCell = newRow.insertCell(7);
+    var deleteCell = newRow.insertCell(5);
     deleteCell.innerHTML=`
     <input type="button" class="" value="🗑️" onclick="deleteRow(this)">`
 
