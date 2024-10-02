@@ -1,7 +1,9 @@
-
 var currentData = {};
-currentData.Project = "test project";
+currentData.project = "";
+currentData.comment = "";
 currentData.samples = [];
+
+
 
 
 // load data from local storage
@@ -38,8 +40,20 @@ function updateSampleCollectionData() {
     currentData.samples.push(newSample);
 
     // update localStorage
+    saveProjectData()
 
     // create new row in table.
+    createRow(newSample)
+
+    //clear data
+    document.getElementById("sampleForm").reset();
+    //document.getElementById("sample1-type").reset()
+
+
+    document.getElementById("sampleFormDiv").style.display = "none";
+  }
+
+function createRow(newSample) {
     var newRow = document.getElementById("sample-table").insertRow(-1);
     var count = newRow.insertCell(0);
     count.innerText = currentData.samples.length;
@@ -61,21 +75,14 @@ function updateSampleCollectionData() {
     var deleteCell = newRow.insertCell(5);
     deleteCell.innerHTML=`
     <input type="button" class="" value="🗑️" onclick="deleteRow(this)">`
-
-    //clear data
-    document.getElementById("sampleForm").reset();
-    //document.getElementById("sample1-type").reset()
-
-
-    document.getElementById("sampleFormDiv").style.display = "none";
-  }
-
+    
+}
 
 function deleteRow(r) {
     var i = r.parentNode.parentNode.rowIndex;
     document.getElementById("sample-table").deleteRow(i);
     currentData.samples.splice(i-1,1);
-    console.log(currentData);
+    saveProjectData()
 }
 
 function updateAnalyses(value) {
@@ -93,67 +100,55 @@ function updateAnalyses(value) {
     }
 }
 
+// save data to local storage
+function saveProjectData() {
+    window.localStorage.setItem(currentData.project,JSON.stringify(currentData))
+    window.localStorage.setItem("currentProjectName",currentData.project)
+}
+
+// get project data from UI to currentData
+function storeProjectData() {
+    currentData.project = document.getElementById("project-name").value;
+    currentData.comment = document.getElementById("project-comment").value;
+    saveProjectData()
+}
+
+
 var v = document.getElementById("sample1-type").value;
 updateAnalyses(v);
 
 // example code for loading/storing data from/in localStorage
 
-// function load_data() {
+function loadData() {
 
-//     // read data - if no data, seed it
-//     currentData = JSON.parse(window.localStorage.getItem("companyData"))
-//     if (currentData == null) {
-//         currentData = companyData
-//         save_data(companyData)
-//     }
+    const queryString = window.location.search
+    const urlParams = new URLSearchParams(queryString);
+    const load = urlParams.get("load");
+
+    if (load == "__new__") {
+        // do nothing
+    } else if (load == "__current__") {
+
+        currentProjectName = window.localStorage.getItem("currentProjectName")
+        currentData = JSON.parse(window.localStorage.getItem(currentProjectName))
+        if (currentData != null) {
+            //put values into UI
+            document.getElementById("project-name").value = currentData.project;
+            document.getElementById("project-comment").value = currentData.comment;
+
+            for (let i = 0; i < currentData.samples.length; i++ ) {
+                createRow(currentData.samples[i]);
+            }
+        }
+    }
+}
+
+function mainMenu() {
+    if (currentData.project != "") {
+        saveProjectData()
+
+    }
+
+    window.location = "index.html"
     
-
-//     document.getElementById("person-name").value = currentData.name
-//     document.getElementById("person-email").value = currentData.email
-//     document.getElementById("company-name").value = currentData.company
-//     document.getElementById("company-address").value = currentData.address
-//     document.getElementById("company-city").value = currentData.city
-//     document.getElementById("company-state").value = currentData.state
-//     document.getElementById("company-zip").value = currentData.zip
-//     document.getElementById("company-phone").value = currentData.phone
-    
-// }
-
-// // save data to local storage
-// function save_data(data) {
-//     window.localStorage.setItem("companyData",JSON.stringify(data))
-// }
-
-// function save_close() {
-//     currentData = {}
-//     currentData.name = document.getElementById("person-name").value 
-//     currentData.email = document.getElementById("person-email").value
-//     currentData.company = document.getElementById("company-name").value
-//     currentData.address = document.getElementById("company-address").value
-//     currentData.city = document.getElementById("company-city").value
-//     currentData.state = document.getElementById("company-state").value
-//     currentData.zip = document.getElementById("company-zip").value
-//     currentData.phone = document.getElementById("company-phone").value 
-
-//     save_data(currentData)
-//     window.location = "index.html"
-// }
-
-// function addSample() {
-//     sampleDiv = document.getElementById("samples")
-//     sampleDiv
-
-//     // create template
-//     const html_template = ``
-    
-//     var html = html_template.replaceAll("<#number#>",(playerCount+1).toString());
-
-//     // create a new node and set the innerHTML, then append
-//     var node = document.createElement("div");
-//     node.innerHTML = html;
-//     document.getElementById("card-container").appendChild(node);
-
-//     // increment count
-//     playerCount +=1;
-    
-// }
+}

@@ -3,5 +3,10 @@ function loadAdmin() {
 }
 
 function createNewProject() {
-    window.location = "project.html";
+    window.location = "project.html?load=__new__";
+}
+
+function loadCurrentProject() {
+    window.location = "project.html?load=__current__"
+    
 }

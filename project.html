@@ -10,7 +10,7 @@
     <script src="scripts/project.js" defer></script>
     <title>Document</title>
 </head>
-<body class="content-center" onload="javascript:load_data()">
+<body class="content-center" onload="javascript:loadData()">
     <header>
         <div class="container text-center mb-3">
             <h1>Project Information</h1>          
@@ -21,11 +21,11 @@
         <div class="container text-center mb-3">
             <div class="row mb-3">
                 <label for="project-name" class="label">Project Name</label>
-                <input id="project-name" class="input" type="text">
+                <input id="project-name" class="input" type="text" onchange="storeProjectData()">
             </div>
             <div class="row mb-3">
-                <label for="project-comments" class="label">Comments</label>
-                <input id="project-comments" class="input" type="text">
+                <label for="project-comment" class="label">Comments</label>
+                <input id="project-comment" class="input" type="text" onchange="storeProjectData()">
             </div>
             <div class="sample-table">
                 <table id="sample-table">
@@ -41,6 +41,11 @@
             <div class="container text-center mb-3">
                 <button class="btn btn-success" onclick="addNewSample()">New Sample</button>
             </div>
+            <div class="container text-center mb-3">
+                <button class="btn btn-primary" onclick="mainMenu()">Main Menu</button>
+                <button class="btn btn-secondary" onclick="createReport()">Create Report</button>
+            </div>
+
         </div>
 
     </main>
@@ -94,7 +99,11 @@
                 <div class="row mb-3">
                     <div class="col-sm">
                         <label for="sample1-duration" class="label">duration</label>
-                        <input id="sample1-duration" class="input" type="text">    
+                        <input id="sample1-duration" class="input" type="text" list="durationList">
+                        <datalist id="durationList">
+                            <option value="480">  
+                            <option value="15">
+                        </datalist>
                     </div>
                 </div>
                 <div class="row mb-3">
