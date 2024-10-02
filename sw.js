@@ -15,6 +15,7 @@ var VERSION = 'version_01';
 var URLS = [    
   `${GHPATH}/`,
   `${GHPATH}/index.html`,
+  `${GHPATH}/project.html`,
   `${GHPATH}/qr_code_example/index.html`,
   `${GHPATH}/qr_code_example/script.js`,
   `${GHPATH}/qr_code_example/style.css`,
