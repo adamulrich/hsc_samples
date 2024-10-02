@@ -11,7 +11,7 @@ function loadCurrentProject() {
     
 }
 const currentProjectName = window.localStorage.getItem("currentProjectName")
-if ( currentProjectName!= "") {
+if ( currentProjectName!= null) {
     var btn = document.getElementById("loadProjectBtn");
     btn.disabled = false;
     btn.innerText = "Load " + currentProjectName + " Project"
