@@ -32,25 +32,31 @@ function updateSampleCollectionData() {
     newSample.analyses = []
 
     const analysesSelect = document.getElementById("sample1-analyses");
-    for (let i = 0;i < analysesSelect.selectedOptions.length; i++) {
-        newSample.analyses.push(analysesSelect.selectedOptions[i].label)
+    const analysesCount = analysesSelect.selectedOptions.length
+    if (analysesCount > 0) {
+        for (let i = 0;i < analysesCount; i++) {
+            newSample.analyses.push(analysesSelect.selectedOptions[i].label)
+        }
+
+        // add object to currentData
+        currentData.samples.push(newSample);
+
+        // update localStorage
+        saveProjectData()
+
+        // create new row in table.
+        createRow(newSample)
+
+        //clear data
+        document.getElementById("sampleForm").reset();
+        //document.getElementById("sample1-type").reset()
+
+        document.getElementById("sampleFormDiv").style.display = "none";
     }
-
-    // add object to currentData
-    currentData.samples.push(newSample);
-
-    // update localStorage
-    saveProjectData()
-
-    // create new row in table.
-    createRow(newSample)
-
-    //clear data
-    document.getElementById("sampleForm").reset();
-    //document.getElementById("sample1-type").reset()
-
-
-    document.getElementById("sampleFormDiv").style.display = "none";
+    else {
+     // we don't have any analyses selected, warn dialog
+     alert("No Analyses type selected")
+    }
   }
 
 function createRow(newSample) {
@@ -90,13 +96,21 @@ function updateAnalyses(value) {
     select.selectedIndex = -1;
     select.style.display = "none";
     select.style.display = "block";
+    var count = 0;
+    var currentItem;
     for (i of select.children) {
         i.checked = false;
         if (i.className == value) {
             i.style.display = "block";
+            count++;
+            currentItem = i;
+            
         } else {
             i.style.display = "none";
         }
+    }
+    if (count == 1) {
+        currentItem.selected = true;
     }
 }
 
