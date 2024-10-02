@@ -8,6 +8,7 @@ currentData.samples = [];
 
 // load data from local storage
 function addNewSample() {
+    document.getElementById("btnAddNewSample").disabled = true;
     document.getElementById("sampleFormDiv").style.display = "block";
     var v = document.getElementById("sample1-type").value;
     let currentDate = new Date().toJSON().slice(0, 10);
@@ -17,6 +18,7 @@ function addNewSample() {
   
 function closeForm() {
     document.getElementById("sampleFormDiv").style.display = "none";
+    document.getElementById("btnAddNewSample").disabled = false;
 }
 
 function updateSampleCollectionData() {
@@ -52,6 +54,8 @@ function updateSampleCollectionData() {
         //document.getElementById("sample1-type").reset()
 
         document.getElementById("sampleFormDiv").style.display = "none";
+
+        document.getElementById("btnAddNewSample").disabled = false;
     }
     else {
      // we don't have any analyses selected, warn dialog
