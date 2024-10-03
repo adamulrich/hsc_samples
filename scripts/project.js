@@ -1,10 +1,8 @@
 var currentData = {};
 currentData.project = "";
 currentData.comment = "";
+currentData.date = new Date().getDate();
 currentData.samples = [];
-
-
-
 
 // load data from local storage
 function addNewSample() {
@@ -120,14 +118,21 @@ function updateAnalyses(value) {
 
 // save data to local storage
 function saveProjectData() {
+    // update the date
+    currentData.date = new Date().getDate();
+
+    // save to local storage
     window.localStorage.setItem(currentData.project,JSON.stringify(currentData))
     window.localStorage.setItem("currentProjectName",currentData.project)
 }
 
 // get project data from UI to currentData
 function storeProjectData() {
+    // get data from UI and put into currentData
     currentData.project = document.getElementById("project-name").value;
     currentData.comment = document.getElementById("project-comment").value;
+
+    // save to local storage
     saveProjectData()
 }
 
@@ -142,6 +147,7 @@ function loadData() {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString);
     const load = urlParams.get("load");
+    const projectName = urlParams.get("project");
 
     if (load == "__new__") {
         // do nothing
@@ -149,16 +155,26 @@ function loadData() {
 
         currentProjectName = window.localStorage.getItem("currentProjectName")
         currentData = JSON.parse(window.localStorage.getItem(currentProjectName))
-        if (currentData != null) {
-            //put values into UI
-            document.getElementById("project-name").value = currentData.project;
-            document.getElementById("project-comment").value = currentData.comment;
+        putDataInUI(currentData);
+    }
 
-            for (let i = 0; i < currentData.samples.length; i++ ) {
-                createRow(currentData.samples[i]);
-            }
+    else if (projectName != null) {
+        currentData = JSON.parse(window.localStorage.getItem(projectName))
+        putDataInUI(currentData);
+    }
+}
+
+function putDataInUI(currentData) {
+    if (currentData != null) {
+        //put values into UI
+        document.getElementById("project-name").value = currentData.project;
+        document.getElementById("project-comment").value = currentData.comment;
+
+        for (let i = 0; i < currentData.samples.length; i++ ) {
+            createRow(currentData.samples[i]);
         }
     }
+
 }
 
 function mainMenu() {
@@ -166,7 +182,6 @@ function mainMenu() {
         saveProjectData()
 
     }
-
     window.location = "index.html"
     
 }
