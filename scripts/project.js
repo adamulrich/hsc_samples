@@ -1,7 +1,7 @@
 var currentData = {};
 currentData.project = "";
 currentData.comment = "";
-currentData.date = new Date().toJSON();
+currentData.date = new Date().valueOf()
 currentData.samples = [];
 
 // load data from local storage
@@ -119,7 +119,7 @@ function updateAnalyses(value) {
 // save data to local storage
 function saveProjectData() {
     // update the date
-    currentData.date = new Date().toJSON();
+    currentData.date = new Date().valueOf();
 
     // save to local storage
     window.localStorage.setItem(currentData.project,JSON.stringify(currentData))

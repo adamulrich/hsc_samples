@@ -1,3 +1,4 @@
+var projectList = [];
 
 function mainMenu() {
     window.location = "index.html"
@@ -6,7 +7,7 @@ function mainMenu() {
 function loadProjectList() {
     //get list of projects from localstorage
     var objectList = Object.keys(localStorage).map(k => localStorage.getItem(k))
-    var projectList = [];
+    projectList = [];
 
     // walk the localstorage
     for (p of objectList) {
@@ -23,10 +24,12 @@ function loadProjectList() {
     }
 
     //sort the list by date
-    projectList.sort((a,b) => a[1] - b[1]);
-
+    console.log(projectList);
+    projectList.sort((a,b) => new Date((b[1])- new Date(a[1])));
+    console.log(projectList);
     // 
     var selectProject = document.getElementById("project-list");
+    selectProject.innerHTML = '';
     projectList.forEach(p => selectProject.appendChild(new Option(p[0],p[0])))
 }
 
@@ -37,4 +40,23 @@ function selectProject() {
     if (selectedProject != null) {
         window.location = "project.html?project=" + selectedProject;
     }
+}
+
+
+function filterItems(arr, query) {
+    return arr.filter((el) => el[0].toLowerCase().includes(query.toLowerCase()));
+  }
+
+function filterFunction() {
+    // get the filter value
+    const input = document.getElementById("search-filter");
+    const filter = input.value.toLowerCase();
+
+    // filter the list
+    displayList = filterItems(projectList, filter)
+
+    // get the select list and set the values, delete the current options.
+    var selectProject = document.getElementById("project-list");
+    selectProject.innerHTML = '';
+    displayList.forEach(p => selectProject.appendChild(new Option(p[0],p[0])))
 }
