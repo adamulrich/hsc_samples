@@ -7,19 +7,27 @@ function loadProjectList() {
     //get list of projects from localstorage
     var objectList = Object.keys(localStorage).map(k => localStorage.getItem(k))
     var projectList = [];
+
+    // walk the localstorage
     for (p of objectList) {
         try {
             result = JSON.parse(p);
+            // if it contains .project, it's a project
             if (result.project != null) {
-                projectList.push(result.project);
+                // put it in the list.
+                projectList.push([result.project,result.date]);
             }
         } catch (error) {
             continue;
         }
     }
-    var selectProject = document.getElementById("project-list");
-    projectList.forEach(p => selectProject.appendChild(new Option(p,p)))
 
+    //sort the list by date
+    projectList.sort((a,b) => a[1] - b[1]);
+
+    // 
+    var selectProject = document.getElementById("project-list");
+    projectList.forEach(p => selectProject.appendChild(new Option(p[0],p[0])))
 }
 
 function selectProject() {
