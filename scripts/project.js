@@ -7,7 +7,7 @@ currentData.date = new Date().valueOf()
 currentData.samples = [];
 
 // addEditSampleMode controls whether we are adding a new sample, or editing an existing sample
-var addEditSampleMode = "new";
+var addEditSampleMode = "";
 
 // tableRowEditIndex is used to handle where in the sample table we are doing an edit. It gets set in the
 // editRow function, and used in the 
@@ -24,7 +24,7 @@ function addNewSample(data = null) {
 
     // set values if data is passed in
     if(data) {
-        addEditSampleMode == "edit";
+        addEditSampleMode = "edit";
 
         document.getElementById("create-update-btn").textContent = "Update";
         document.getElementById("sample1-date").value = data.date;
@@ -45,7 +45,7 @@ function addNewSample(data = null) {
 
     // it now data, then we are in new mode.
     } else {
-        addEditSampleMode == "new";
+        addEditSampleMode = "new";
         document.getElementById("create-update-btn").textContent = "Create";
     }
 }
@@ -82,7 +82,7 @@ function updateSampleCollectionData() {
 
         } else 
         if (addEditSampleMode == "edit") {
-            currentData.samples[index] = newSample;
+            currentData.samples[tableRowEditIndex] = newSample;
 
             // tableRowEditIndex for array is 0 based, for UI is 1 based, so +1
             createUpdateRow(newSample, tableRowEditIndex + 1)
