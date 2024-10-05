@@ -1,17 +1,53 @@
+
+// current data is the current project data (whether new or loaded from localStorage)
 var currentData = {};
 currentData.project = "";
 currentData.comment = "";
 currentData.date = new Date().valueOf()
 currentData.samples = [];
 
+// addEditSampleMode controls whether we are adding a new sample, or editing an existing sample
+var addEditSampleMode = "new";
+
+// tableRowEditIndex is used to handle where in the sample table we are doing an edit. It gets set in the
+// editRow function, and used in the 
+var tableRowEditIndex = 0;
+
 // load data from local storage
-function addNewSample() {
+function addNewSample(data = null) {
     document.getElementById("btnAddNewSample").disabled = true;
     document.getElementById("sampleFormDiv").style.display = "block";
     var v = document.getElementById("sample1-type").value;
     let currentDate = new Date().toJSON().slice(0, 10);
     document.getElementById("sample1-date").value=currentDate;
     updateAnalyses(v);
+
+    // set values if data is passed in
+    if(data) {
+        addEditSampleMode == "edit";
+
+        document.getElementById("create-update-btn").textContent = "Update";
+        document.getElementById("sample1-date").value = data.date;
+        document.getElementById("sample1-id").value = data.id;
+        document.getElementById("sample1-type").value = data.type;
+        document.getElementById("sample1-serial-number").value = data.serialNumber;
+        document.getElementById("sample1-duration").value = data.duration;
+        
+        updateAnalyses(data.type);
+        // select analyses options.
+        const analysesSelect = document.getElementById("sample1-analyses");
+        for (option of analysesSelect.children)  {
+            if (data.analyses.includes(option.value)) {
+                option.selected = true;
+            }
+        }
+        // make the correct analyses visible.
+
+    // it now data, then we are in new mode.
+    } else {
+        addEditSampleMode == "new";
+        document.getElementById("create-update-btn").textContent = "Create";
+    }
 }
   
 function closeForm() {
@@ -39,13 +75,21 @@ function updateSampleCollectionData() {
         }
 
         // add object to currentData
-        currentData.samples.push(newSample);
+        if (addEditSampleMode == "new") {
+
+            currentData.samples.push(newSample);
+            createUpdateRow(newSample)
+
+        } else 
+        if (addEditSampleMode == "edit") {
+            currentData.samples[index] = newSample;
+
+            // tableRowEditIndex for array is 0 based, for UI is 1 based, so +1
+            createUpdateRow(newSample, tableRowEditIndex + 1)
+        }
 
         // update localStorage
         saveProjectData()
-
-        // create new row in table.
-        createRow(newSample)
 
         //clear data
         document.getElementById("sampleForm").reset();
@@ -61,13 +105,35 @@ function updateSampleCollectionData() {
     }
   }
 
-function createRow(newSample) {
-    var newRow = document.getElementById("sample-table").insertRow(-1);
+
+// creates or updates a row in the sample table
+// if default location, it gets created at the end
+function createUpdateRow(newSample, location = -1) {
+    if (location == -1) {
+        var newRow = document.getElementById("sample-table").insertRow(location);
+    } else
+    {  
+        // if we are in edit mode, delete the current row before insertion.
+        if (addEditSampleMode == "edit") {
+            document.getElementById("sample-table").deleteRow(location);
+        }
+        
+        var newRow = document.getElementById("sample-table").insertRow(location);
+     }
     var count = newRow.insertCell(0);
-    count.innerText = currentData.samples.length;
+    
+    // calculate sample #
+    if (location == -1) {
+        count.innerText = currentData.samples.length;
+    } else {
+        count.innerText = location;
+    }
+
+    // create cells and populate data
     var date_id_duration = newRow.insertCell(1);
     date_id_duration.innerHTML = newSample.date + "<br>" + newSample.id + "<br>" +
         newSample.duration;
+
     var type_serial = newRow.insertCell(2);
     type_serial.innerHTML = newSample.type + "<br>" + newSample.serialNumber;
 
@@ -79,18 +145,28 @@ function createRow(newSample) {
     // edit/delete buttons
     var editCell = newRow.insertCell(4);
     editCell.innerHTML=`
-    <input type="button" class="" value="✏️" onclick="editRow(this)">`
+    <input type="button" class="edit_btn" value="✏️" onclick="editRow(this)">`
     var deleteCell = newRow.insertCell(5);
     deleteCell.innerHTML=`
-    <input type="button" class="" value="🗑️" onclick="deleteRow(this)">`
+    <input type="button" class="edit_btn" value="🗑️" onclick="deleteRow(this)">`
     
 }
 
+function editRow(r) {
+    tableRowEditIndex = r.parentNode.parentNode.rowIndex -1 ;
+    addNewSample(currentData.samples[tableRowEditIndex]);
+
+}
+
 function deleteRow(r) {
-    var i = r.parentNode.parentNode.rowIndex;
-    document.getElementById("sample-table").deleteRow(i);
-    currentData.samples.splice(i-1,1);
-    saveProjectData()
+    // confirm delete
+    var response = confirm("Delete?");
+    if (response) {
+        var i = r.parentNode.parentNode.rowIndex;
+        document.getElementById("sample-table").deleteRow(i);
+        currentData.samples.splice(i-1,1);
+        saveProjectData()
+    }
 }
 
 function updateAnalyses(value) {
@@ -171,7 +247,7 @@ function putDataInUI(currentData) {
         document.getElementById("project-comment").value = currentData.comment;
 
         for (let i = 0; i < currentData.samples.length; i++ ) {
-            createRow(currentData.samples[i]);
+            createUpdateRow(currentData.samples[i], i + 1);
         }
     }
 
