@@ -90,7 +90,13 @@
                         </div> 
                         <div class="row mb-3">
                             <div class="col-sm">
-                                <button class="btn btn-outline-primary btn-camera">📷</button>
+                                <button class="btn btn-outline-primary btn-camera" onclick="scanQRCode()">📷</button>
+                                <div class="container">
+                                    <div class="section">
+                                        <div id="qr-reader" >
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <input id="sample1-serial-number" class="input" type="text">
@@ -138,8 +144,9 @@
     </form>
     </div>
 
-    <script>
-        </script>
+    <script
+        src="/scripts/html5-qrcode.min.js">
+    </script>
 
 </body>
 </html>

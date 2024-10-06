@@ -261,3 +261,68 @@ function mainMenu() {
     window.location = "index.html"
     
 }
+
+function domReady(fn) {
+    if (
+        document.readyState === "complete" ||
+        document.readyState === "interactive"
+    ) {
+        setTimeout(fn, 1000);
+    } else {
+        document.addEventListener("DOMContentLoaded", fn);
+    }
+}
+
+// function onScanSuccess(decodeText, decodeResult) {
+//     // put value into form
+//     document.getElementById("sample1-serial-number").value = decodeText;
+//     html
+//     htmlscanner.terminateScanning();
+
+//     // hide qr code scanner
+//     document.getElementById("qr-reader").delete;
+    
+//     return 
+// }
+
+function error(err) {
+    console.log(err);
+}
+
+var cameraId;
+Html5Qrcode.getCameras().then(devices => {
+    /**
+     * devices would be an array of objects of type:
+     * { id: "id", label: "label" }
+     */
+    if (devices && devices.length) {
+      cameraId = devices[0].id;
+      // .. use this to start scanning.
+    }
+  }).catch(err => {
+    // handle err
+  });
+
+const html5QrCode = new Html5Qrcode("qr-reader");
+
+
+const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+    document.getElementById("sample1-serial-number").value = decodedText;
+    html5QrCode.stop().then((ignore) => {
+        // QR Code scanning is stopped.
+      }).catch((err) => {
+        // Stop failed, handle it.
+      }); 
+
+    // hide qr code scanner
+    // document.getElementById("qr-reader").hidden = true;
+
+  };
+  
+function scanQRCode() {
+  document.getElementById("qr-reader").hidden = false;
+  const config = { fps: 10, qrbox: { width: 250, height: 250 } };
+  html5QrCode.start(cameraId, config, qrCodeSuccessCallback);
+}
+
+    
