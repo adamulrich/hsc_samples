@@ -275,11 +275,25 @@ function onScanSuccess(decodedText, decodedResult) {
 
   }
    
-
 function scanQRCode() {
     html5QrcodeScanner = new Html5QrcodeScanner(
         "qr-reader",
         { fps: 10, qrbox: {width: 250, height: 250} },
         /* verbose= */ false);
     html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+}
+
+function convertHTMLtoPDF() {
+    const { jsPDF } = window.jspdf;
+
+    let doc = new jsPDF('l', 'mm', [1500, 1400]);
+    let pdfjs = document.querySelector('main');
+
+    doc.html(pdfjs, {
+        callback: function(doc) {
+            doc.save("newpdf.pdf");
+        },
+        x: 12,
+        y: 12
+ });
 }
