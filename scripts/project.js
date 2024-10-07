@@ -212,11 +212,8 @@ function storeProjectData() {
     saveProjectData()
 }
 
-
 var v = document.getElementById("sample1-type").value;
 updateAnalyses(v);
-
-// example code for loading/storing data from/in localStorage
 
 function loadData() {
 
@@ -258,6 +255,31 @@ function mainMenu() {
         saveProjectData()
 
     }
-    window.location = "index.html"
-    
+    window.location = "index.html"    
+}
+
+
+var html5QrcodeScanner;
+
+function onScanSuccess(decodedText, decodedResult) {
+    // handle the scanned code as you like, for example:
+    document.getElementById("sample1-serial-number").value = decodedText;
+    html5QrcodeScanner.clear();
+    html5QrcodeScanner = null;
+    document.getElementById('qr-reader').innerHTML = '';
+  }
+  
+  function onScanFailure(error) {
+    // handle scan failure, usually better to ignore and keep scanning.
+    // for example:
+
+  }
+   
+
+function scanQRCode() {
+    html5QrcodeScanner = new Html5QrcodeScanner(
+        "qr-reader",
+        { fps: 10, qrbox: {width: 250, height: 250} },
+        /* verbose= */ false);
+    html5QrcodeScanner.render(onScanSuccess, onScanFailure);
 }

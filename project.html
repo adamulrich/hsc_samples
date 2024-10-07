@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,10 +11,11 @@
     <script src="scripts/project.js" defer></script>
     <title>Project/Sample Entry</title>
 </head>
+
 <body class="content-center" onload="javascript:loadData()">
     <header>
         <div class="container text-center mb-3">
-            <h1>Project Information</h1>          
+            <h1>Project Information</h1>
             <img src="images/icon.png" alt="" width="100px" height="100px">
         </div>
     </header>
@@ -52,94 +54,107 @@
     <!-- <button class="open-button btn btn-primary" onclick="openForm()">Create Sample</button> -->
 
     <div class="form-popup" id="sampleFormDiv">
-    <form action="#" id="sampleForm" class="form-container">
+        <form onsubmit="return false;" id="sampleForm" class="form-container">
 
-        <div id="samples" class="container text-center mb-3">
-            <div class="container" id="sample-1">
-                <div class="row mb-3">
-                    <div class="col-sm">
-                        <label for="sample1-date" class="label">Date</label>
-                        <input id="sample1-date" class="input" type="date" value="">    
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-sm">
-                        <label for="sample1-id" class="label">ID</label>
-                        <input id="sample1-id" class="input" type="text">    
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md">
-                        <label for="sample1-type" class="label">Type</label>
-                        <select class="select" id="sample1-type" onchange="updateAnalyses(this.value)">
-                            <option>564-Organic-Vapor</option> 
-                            <option>581-571-Aldehyde</option> 
-                            <option>543A-Acetic-Acid</option> 
-                            <option>587-Hydrogen-Peroxide</option> 
-                            <option>575D-Nitrous-Oxide</option> 
-                            <option>574A-Halogenated-Gases</option> 
-                        </select>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-sm">
-                        <div class="row">
-                            <div class="col-md">
-                                <label for="sample1-serial-number" class="label">Serial No</label>
-                            </div>
-                        </div> 
-                        <div class="row mb-3">
-                            <div class="col-sm">
-                                <button class="btn btn-outline-primary btn-camera">📷</button>
-                            </div>
+            <div id="samples" class="container text-center mb-3">
+                <div class="container" id="sample-1">
+                    <div class="row mb-3">
+                        <div class="col-sm">
+                            <label for="sample1-date" class="label">Date</label>
+                            <input id="sample1-date" class="input" type="date" value="">
                         </div>
-                        <input id="sample1-serial-number" class="input" type="text">
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-sm">
-                        <label for="sample1-duration" class="label">duration</label>
-                        <input id="sample1-duration" class="input" type="text" list="durationList">
-                        <datalist id="durationList">
-                            <option value="480">  
-                            <option value="15">
-                        </datalist>
+                    <div class="row mb-3">
+                        <div class="col-sm">
+                            <label for="sample1-id" class="label">ID</label>
+                            <input id="sample1-id" class="input" type="text">
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md">
-                        <label for="sample1-analyses" class="label">Analyses Type</label>
-                        <select class="select" id="sample1-analyses" multiple>
-                            <option value="Acetone" class="564-Organic-Vapor">Acetone</option> 
-                            <option value="Xylene" class="564-Organic-Vapor">Xylene</option> 
-                            <option value="Methanol" class="564-Organic-Vapor">Methanol</option> 
-                            <option value="Ethanol" class="564-Organic-Vapor">Ethanol</option> 
-                            <option value="Glutaraldehyde" class="581-571-Aldehyde" >Glutaraldehyde</option> 
-                            <option value="Formaldehyde (50-0-0)" class="581-571-Aldehyde" >Formaldehyde (50-0-0)</option> 
-                            <option value="Acetic Acid - (64-19-7)" class="543A-Acetic-Acid" >Acetic Acid - (64-19-7)</option> 
-                            <option value="Hydrogen Peroxide - (7722-84-1)" class="587-Hydrogen-Peroxide" >Hydrogen Peroxide - (7722-84-1)</option> 
-                            <option value="Nitrous Oxide – (10024-97-2)" class="575D-Nitrous-Oxide" >Nitrous Oxide – (10024-97-2)</option> 
-                            <option value="Sevoflurane – (28523-86-6)" class="574A-Halogenated-Gases" >Sevoflurane – (28523-86-6)</option> 
-                            <option value="Isoflurane – (26675-46-7)" class="574A-Halogenated-Gases" >Isoflurane – (26675-46-7)</option> 
-                            <option value="Desflurane – (57041-67-5)" class="574A-Halogenated-Gases" >Desflurane – (57041-67-5)</option> 
-                            
-                        </select>
+                    <div class="row mb-3">
+                        <div class="col-md">
+                            <label for="sample1-type" class="label">Type</label>
+                            <select class="select" id="sample1-type" onchange="updateAnalyses(this.value)">
+                                <option>564-Organic-Vapor</option>
+                                <option>581-571-Aldehyde</option>
+                                <option>543A-Acetic-Acid</option>
+                                <option>587-Hydrogen-Peroxide</option>
+                                <option>575D-Nitrous-Oxide</option>
+                                <option>574A-Halogenated-Gases</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
+                    <div class="row mb-3">
+                        <div class="col-sm">
+                            <div class="row">
+                                <div class="col-md">
+                                    <label for="sample1-serial-number" class="label">Serial No</label>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm">
+                                    <button class="btn btn-camera" onclick="scanQRCode()">📷</button>
+                                    <div class="container">
+                                        <div class="section">
+                                            <div id="qr-reader">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input id="sample1-serial-number" class="input" type="text">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm">
+                            <label for="sample1-duration" class="label">duration</label>
+                            <input id="sample1-duration" class="input" type="text" list="durationList">
+                            <datalist id="durationList">
+                                <option value="480">
+                                <option value="15">
+                            </datalist>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md">
+                            <label for="sample1-analyses" class="label">Analyses Type</label>
+                            <select class="select" id="sample1-analyses" multiple>
+                                <option value="Acetone" class="564-Organic-Vapor">Acetone</option>
+                                <option value="Xylene" class="564-Organic-Vapor">Xylene</option>
+                                <option value="Methanol" class="564-Organic-Vapor">Methanol</option>
+                                <option value="Ethanol" class="564-Organic-Vapor">Ethanol</option>
+                                <option value="Glutaraldehyde" class="581-571-Aldehyde">Glutaraldehyde</option>
+                                <option value="Formaldehyde (50-0-0)" class="581-571-Aldehyde">Formaldehyde (50-0-0)
+                                </option>
+                                <option value="Acetic Acid - (64-19-7)" class="543A-Acetic-Acid">Acetic Acid - (64-19-7)
+                                </option>
+                                <option value="Hydrogen Peroxide - (7722-84-1)" class="587-Hydrogen-Peroxide">Hydrogen
+                                    Peroxide - (7722-84-1)</option>
+                                <option value="Nitrous Oxide – (10024-97-2)" class="575D-Nitrous-Oxide">Nitrous Oxide –
+                                    (10024-97-2)</option>
+                                <option value="Sevoflurane – (28523-86-6)" class="574A-Halogenated-Gases">Sevoflurane –
+                                    (28523-86-6)</option>
+                                <option value="Isoflurane – (26675-46-7)" class="574A-Halogenated-Gases">Isoflurane –
+                                    (26675-46-7)</option>
+                                <option value="Desflurane – (57041-67-5)" class="574A-Halogenated-Gases">Desflurane –
+                                    (57041-67-5)</option>
 
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="row mb-3">
-            <button id="create-update-btn" type="button" class="btn btn-success" onclick="updateSampleCollectionData()">Create</button>
-        </div>
-        <div class="row mb-3">
-            <button type="button" class="btn cancel btn-danger" onclick="closeForm()">cancel</button>
-        </div>
-    </form>
+            <div class="row mb-3">
+                <button id="create-update-btn" type="button" class="btn btn-success"
+                    onclick="updateSampleCollectionData()">Create</button>
+            </div>
+            <div class="row mb-3">
+                <button type="button" class="btn cancel btn-danger" onclick="closeForm()">cancel</button>
+            </div>
+        </form>
     </div>
-
-    <script>
-        </script>
+    <script src="/scripts/html5-qrcode.min.js">
+    </script>
 
 </body>
+
 </html>
