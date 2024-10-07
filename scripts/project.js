@@ -212,11 +212,8 @@ function storeProjectData() {
     saveProjectData()
 }
 
-
 var v = document.getElementById("sample1-type").value;
 updateAnalyses(v);
-
-// example code for loading/storing data from/in localStorage
 
 function loadData() {
 
@@ -258,71 +255,31 @@ function mainMenu() {
         saveProjectData()
 
     }
-    window.location = "index.html"
-    
+    window.location = "index.html"    
 }
 
-function domReady(fn) {
-    if (
-        document.readyState === "complete" ||
-        document.readyState === "interactive"
-    ) {
-        setTimeout(fn, 1000);
-    } else {
-        document.addEventListener("DOMContentLoaded", fn);
-    }
-}
 
-// function onScanSuccess(decodeText, decodeResult) {
-//     // put value into form
-//     document.getElementById("sample1-serial-number").value = decodeText;
-//     html
-//     htmlscanner.terminateScanning();
+var html5QrcodeScanner;
 
-//     // hide qr code scanner
-//     document.getElementById("qr-reader").delete;
-    
-//     return 
-// }
-
-function error(err) {
-    console.log(err);
-}
-
-var cameraId;
-Html5Qrcode.getCameras().then(devices => {
-    /**
-     * devices would be an array of objects of type:
-     * { id: "id", label: "label" }
-     */
-    if (devices && devices.length) {
-      cameraId = devices[0].id;
-      // .. use this to start scanning.
-    }
-  }).catch(err => {
-    // handle err
-  });
-
-const html5QrCode = new Html5Qrcode("qr-reader");
-
-
-const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+function onScanSuccess(decodedText, decodedResult) {
+    // handle the scanned code as you like, for example:
     document.getElementById("sample1-serial-number").value = decodedText;
-    html5QrCode.stop().then((ignore) => {
-        // QR Code scanning is stopped.
-      }).catch((err) => {
-        // Stop failed, handle it.
-      }); 
-
-    // hide qr code scanner
-    // document.getElementById("qr-reader").hidden = true;
-
-  };
+    html5QrcodeScanner.clear();
+    html5QrcodeScanner = null;
+    document.getElementById('qr-reader').innerHTML = '';
+  }
   
-function scanQRCode() {
-  document.getElementById("qr-reader").hidden = false;
-  const config = { fps: 10, qrbox: { width: 250, height: 250 } };
-  html5QrCode.start(cameraId, config, qrCodeSuccessCallback);
-}
+  function onScanFailure(error) {
+    // handle scan failure, usually better to ignore and keep scanning.
+    // for example:
 
-    
+  }
+   
+
+function scanQRCode() {
+    html5QrcodeScanner = new Html5QrcodeScanner(
+        "qr-reader",
+        { fps: 10, qrbox: {width: 250, height: 250} },
+        /* verbose= */ false);
+    html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+}
