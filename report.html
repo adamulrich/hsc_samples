@@ -4,15 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="scripts/html2canvas.min.js"></script>
-    <script src="scripts/jspdf.umd.min.js" defer></script>
+    <!-- <link rel="stylesheet" href="styles/bootstrap.min.css"> -->
+    <!-- <script src="scripts/bootstrap.min.js"></script>     -->
     <script src="scripts/report.js" defer></script>
     <link rel="stylesheet" href="styles/report.css">
 
 </head>
 
 <body>
-    <button onclick="addRowsAndPrint()">create report</button>
+    <button class='btn btn-success' onclick="addRowsAndPrint()">Save Report</button>
+    <button class='btn btn-primary' onclick="window.location = 'index.html'">Main Menu</button>
     <main id="main">
         <table id="report-table">
 
@@ -24,7 +25,7 @@
             <tr>
                 <td colspan="2" class="table-box">
                     <p class="table-header" >Purchase Order or Credit Card Type</p>
-                    <p class="table-data">test information</p>
+                    <p class="table-data">&nbsp</p>
                 </td>
                 <td colspan="2">
                     <p class="table-data">Assay Contact # 46420</p>
@@ -38,11 +39,11 @@
             <tr>
                 <td colspan="2" class="table-box">
                     <p class="table-header" >Project Name or No.</p>
-                    <p class="table-data" id="project-name">placeholder</p>
+                    <p class="table-data" id="project-name">&nbsp</p>
                 </td>
                 <td colspan="2" class="table-box">
                     <p class="table-data">Name</p>
-                    <p class="table-data" id="companydata-name">placeholder</p>
+                    <p class="table-data" id="companydata-name">&nbsp</p>
                 </td>
                 <td colspan="4" class="table-box">
                     <p class="table-data">Name</p>
@@ -53,11 +54,11 @@
             <tr>
                 <td colspan="2" class="table-box">
                     <p class="table-header" >Client Email</p>
-                    <p class="table-data" id="companydata-email">placeholder</p>
+                    <p class="table-data" id="companydata-email">&nbsp</p>
                 </td>
                 <td colspan="2" class="table-box">
                     <p class="table-data">Company/Organization</p>
-                    <p class="table-data">placeholder</p>
+                    <p class="table-data" id="companydata-company">&nbsp</p>
                 </td>
                 <td colspan="4" class="table-box">
                     <p class="table-data">Company/Organization</p>
@@ -216,8 +217,8 @@
             </tr>
         </table>
     </main>
-</body>
-<script defer>
-</script>
+    <script defer>
 
+    </script>
+</body>
 </html>

@@ -1,12 +1,8 @@
 function addRowsAndPrint() {
-    var mainTable = document.getElementById('report-table');
-    var tbody = mainTable.children[0]; // or to use HTMLTableElement, mainTable.tBodies[0]
-
-    for(i=0;i<20;i++) {
-        tbody.insertBefore(mainTable.rows[7].cloneNode(true), mainTable.rows[7]);
-    }
     window.print();
 }
+
+document.addEventListener('DOMContentLoaded', loadData())
 
 function loadData() {
 
@@ -16,5 +12,33 @@ function loadData() {
 
     currentData = JSON.parse(window.localStorage.getItem(projectName))
     companyData = JSON.parse(window.localStorage.getItem("companyData"))
-        
+
+    document.getElementById("project-name").innerText = currentData.project;
+    document.getElementById("companydata-name").innerText = companyData.name;
+    document.getElementById("companydata-email").innerText = companyData.email;
+    document.getElementById("companydata-company").innerText = companyData.company;
+    document.getElementById("companydata-phone").innerText = companyData.phone;
+    document.getElementById("companydata-address").innerText = companyData.address;
+    document.getElementById("companydata-city-state-zip").innerText = companyData.city + "," + companyData.state + " " + companyData.zip;
+
+
+
+    var mainTable = document.getElementById('report-table');
+    var tbody = mainTable.children[0]; // or to use HTMLTableElement, mainTable.tBodies[0]
+    var insertedRow;
+    var i = 7;
+    currentData.samples.forEach(sample => {
+        i++;
+        insertedRow = tbody.insertBefore(mainTable.rows[7].cloneNode(true), mainTable.rows[7]);
+        insertedRow.querySelector("#sample-id").innerText = sample.id;
+        insertedRow.querySelector("#sample-media-type").innerText = sample.type;
+        insertedRow.querySelector("#sample-serial-number").innerText = sample.serialNumber;
+        insertedRow.querySelector("#sample-date").innerText = sample.date;
+        insertedRow.querySelector("#sample-total-time").innerText = sample.duration;
+
+    });
+
+mainTable.deleteRow(i);
+
+
 }
