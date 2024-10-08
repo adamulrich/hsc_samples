@@ -283,17 +283,6 @@ function scanQRCode() {
     html5QrcodeScanner.render(onScanSuccess, onScanFailure);
 }
 
-function convertHTMLtoPDF() {
-    const { jsPDF } = window.jspdf;
-
-    let doc = new jsPDF('l', 'mm', [1500, 1400]);
-    let pdfjs = document.querySelector('main');
-
-    doc.html(pdfjs, {
-        callback: function(doc) {
-            doc.save("newpdf.pdf");
-        },
-        x: 12,
-        y: 12
- });
+function createReport() {
+     window.location = "report.html?project=" + currentData.project;
 }

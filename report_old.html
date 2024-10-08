@@ -6,24 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="scripts/html2canvas.min.js"></script>
     <script src="scripts/jspdf.umd.min.js" defer></script>
-    <script src="scripts/report.js" defer></script>
     <link rel="stylesheet" href="styles/report.css">
 
 </head>
 
 <body>
-    <button onclick="addRowsAndPrint()">create report</button>
+    <button onclick="convertHTMLtoPDF()">create report</button>
     <main id="main">
-        <table id="report-table">
+        <table>
 
             <tr>
-                <td colspan="6"><img src="images/at_labs.png" style="width: 500px;"></td>
-                <td colspan="3"><img src="images/service_authorized.png"></td>
+                <td colspan="7"><img src="images/at_labs.png"></td>
+                <td colspan="2"><img src="images/service_authorized.png"></td>
             </tr>
             <!-- first row header table -->
             <tr>
                 <td colspan="2" class="table-box">
-                    <p class="table-header" >Purchase Order or Credit Card Type</p>
+                    <p class="table-header" style="width: 140px;">Purchase Order or Credit Card Type</p>
                     <p class="table-data">test information</p>
                 </td>
                 <td colspan="2">
@@ -37,7 +36,7 @@
             <!-- second row header table -->
             <tr>
                 <td colspan="2" class="table-box">
-                    <p class="table-header" >Project Name or No.</p>
+                    <p class="table-header" style="width: 140px;">Project Name or No.</p>
                     <p class="table-data" id="project-name">placeholder</p>
                 </td>
                 <td colspan="2" class="table-box">
@@ -52,7 +51,7 @@
             <!-- third row header table -->
             <tr>
                 <td colspan="2" class="table-box">
-                    <p class="table-header" >Client Email</p>
+                    <p class="table-header" style="width: 140px;">Client Email</p>
                     <p class="table-data" id="companydata-email">placeholder</p>
                 </td>
                 <td colspan="2" class="table-box">
@@ -126,7 +125,7 @@
                     <p class="table-header-bold">ANALYSES/TESTS REQUESTED</p>
                 </td>
             </tr>
-            <tr id="sample-data">
+            <tr>
                 <td colspan="1" class="table-box">
                 </td>
                 <td colspan="2" class="table-box">
@@ -172,6 +171,8 @@
                         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                         Date
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        &nbsp&nbsp&nbsp&nbsp&nbsp
                     <p>
                 </td>
                 <td class="table-box" colspan="3">
@@ -179,6 +180,8 @@
                         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                         &nbsp&nbsp&nbsp&nbsp&nbsp
                         Date
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        &nbsp&nbsp&nbsp&nbsp&nbsp
                     </p>
                 </td>
             </tr>
@@ -188,6 +191,8 @@
                         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                         &nbsp&nbsp&nbsp&nbsp&nbsp
                         Date
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        &nbsp&nbsp&nbsp&nbsp&nbsp
                     </p>
                 </td>
                 <td class="table-box" colspan="3">
@@ -195,6 +200,8 @@
                         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                         Date
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        &nbsp&nbsp&nbsp&nbsp&nbsp
                     </p>
                 </td>
             </tr>
@@ -204,6 +211,8 @@
                         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                         &nbsp&nbsp&nbsp&nbsp&nbsp
                         Date
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        &nbsp&nbsp&nbsp&nbsp&nbsp
                     </p>
                 </td>
                 <td class="table-box" colspan="3">
@@ -211,6 +220,8 @@
                         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                         Date
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        &nbsp&nbsp&nbsp&nbsp&nbsp
                     </p>
                 </td>
             </tr>
@@ -218,6 +229,21 @@
     </main>
 </body>
 <script defer>
+    function convertHTMLtoPDF() {
+        const { jsPDF } = window.jspdf;
+
+        let doc = new jsPDF('p', 'in', 'letter');
+        let pdfjs = document.querySelector('main');
+
+        doc.html(pdfjs, {
+            callback: function (doc) {
+                doc.save("newpdf.pdf");
+            },
+            x: 12,
+            y: 12
+        });
+    }
+
 </script>
 
 </html>
