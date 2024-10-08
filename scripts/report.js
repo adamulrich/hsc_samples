@@ -13,6 +13,7 @@ function loadData() {
     currentData = JSON.parse(window.localStorage.getItem(projectName))
     companyData = JSON.parse(window.localStorage.getItem("companyData"))
 
+    // fill out top of form
     document.getElementById("project-name").innerText = currentData.project;
     document.getElementById("companydata-name").innerText = companyData.name;
     document.getElementById("companydata-email").innerText = companyData.email;
@@ -27,18 +28,24 @@ function loadData() {
     var tbody = mainTable.children[0]; // or to use HTMLTableElement, mainTable.tBodies[0]
     var insertedRow;
     var i = 7;
+
+    // add each row
     currentData.samples.forEach(sample => {
         i++;
-        insertedRow = tbody.insertBefore(mainTable.rows[7].cloneNode(true), mainTable.rows[7]);
+        insertedRow = tbody.insertBefore(mainTable.rows[7].cloneNode(true), mainTable.rows[i]);
         insertedRow.querySelector("#sample-id").innerText = sample.id;
         insertedRow.querySelector("#sample-media-type").innerText = sample.type;
         insertedRow.querySelector("#sample-serial-number").innerText = sample.serialNumber;
         insertedRow.querySelector("#sample-date").innerText = sample.date;
         insertedRow.querySelector("#sample-total-time").innerText = sample.duration;
 
+        // add analyses
+        sample.analyses.forEach(test => {
+            insertedRow.querySelector("#sample-tests").innerHTML +='<p class="table-data" id="sample-test-1">' + test + '</p>'
+        })    
     });
 
-mainTable.deleteRow(i);
+mainTable.deleteRow(7);
 
 
 }
