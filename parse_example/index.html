@@ -82,9 +82,9 @@
             // Creates a new Parse "User" object, which is created by default in your Parse app
             let user = new Parse.User();
             // Set the input values to the new "User" object
-            user.set("username", "amu");
-            user.set("email", "adamulrich@hotmail.com");
-            user.set("password", 'test');
+            user.set("username", "awp");
+            user.set("email", "awprince@healthandsafetyinc.com");
+            user.set("password", 'hsc_samples');
             // Call the save method, which returns the saved object if successful
             user = await user.save();
 
@@ -93,7 +93,7 @@
         function log_in() {
             // Create a new instance of the user class
             var user = Parse.User
-                .logIn("amu", "test").then(function(user) {
+                .logIn("awp", "hsc_samples").then(function(user) {
                     console.log('login successful');
             }).catch(function(error){
                 console.log("Error: " + error.code + " " + error.message);
@@ -117,7 +117,7 @@
     <button onclick="get_analysis_requests()">get_analysis_requests</button>
     <button onclick="create_project()">create project</button>
     <button onclick="read_project()">read project</button>
-    <!-- <button onclick="create_user()">create user</button> -->
+    <button onclick="create_user()">create user</button>
     <button onclick="log_in()">log in</button>
     <main id="main">
         nothing yet.

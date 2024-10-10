@@ -22,6 +22,8 @@ function addNewSample(data = null) {
     document.getElementById("sample1-date").value=currentDate;
     updateAnalyses(v);
 
+    document.getElementById("sample1-id").focus();
+
     // set values if data is passed in
     if(data) {
         addEditSampleMode = "edit";
