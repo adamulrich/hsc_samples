@@ -66,10 +66,23 @@ function deleteProject() {
 
     if (selectedProject != null) {
         // confirm that they really want to delete
-        var response = confirm("Delete. Are you Sure?");
+        var response = confirm("Delete " + selectedProject + ". Are you Sure?");
         if (response) {
+            var objectId = JSON.parse(window.localStorage.getItem(selectedProject)).objectId;
             window.localStorage.removeItem(selectedProject)
         }
+
+        var deleteList = null;
+        // put value into delete list to delete from cloud
         loadProjectList();
+        if (objectId) {
+            deleteList = JSON.parse(window.localStorage.getItem("deleteList"));
+            if (deleteList) {
+                deleteList.push(objectId);
+            } else {
+                deleteList = [objectId];
+            }
+            window.localStorage.setItem("deleteList", JSON.stringify(deleteList));
+        }
     }
 }

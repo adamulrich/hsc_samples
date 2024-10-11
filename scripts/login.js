@@ -32,7 +32,7 @@ async function syncDataToCloud() {
         // iterate over the projects in memory
         for (project of projectList) {
 
-            p = new projects_template();
+            var p = new projects_template();
 
             // if the project has an objectID, set it to update the item.
             if (project.objectId != "" ){
@@ -42,10 +42,49 @@ async function syncDataToCloud() {
             p.set("data",JSON.stringify(project));
             p.set("project",project.project);
             p.set("user_name",userName);
-            p = await p.save();
+            try {
+                p = await p.save();    
+            } catch (error) {
+                //
+                if (error.code == 101) {
+                    // couldn't find this item, remove the objectId
+                    delete project.objectId;
+                    window.localStorage.setItem(project.project,JSON.stringify(project));
+                    var q = new projects_template();
+                    q.set("data",JSON.stringify(project));
+                    q.set("project",project.project);
+                    q.set("user_name",userName);
+                    try {
+                        q = await q.save();
+                    } catch (error) {
+                        console.log(error);
+                    }
+                }
+            }
+            
         
         };
      
+        // delete items from delete list.
+        var deleteList = JSON.parse(window.localStorage.getItem("deleteList"));
+        if (deleteList) {
+            for (objectId of deleteList) {
+
+                const deleteQuery = new Parse.Query(projects_template);
+
+                // here you put the objectId that you want to delete
+                const object = await deleteQuery.get(objectId);
+                try {
+                    const response = await object.destroy();
+                    console.log('Deleted ParseObject', response);
+                } catch (error) {
+                    console.error('Error while deleting ParseObject', error);
+                }
+            }
+            // delete delete list
+            window.localStorage.removeItem("deleteList");
+        }
+
         // pull all projects from the cloud into local storage.
         const query = new Parse.Query(projects_template);
         const results = await query.find();
@@ -58,6 +97,8 @@ async function syncDataToCloud() {
 
             // put into localStorage
             window.localStorage.setItem(r.get("project"),JSON.stringify(temp));
+
+        
             
         }
         document.getElementById("result-text").innerText = "cloud sync completed";
