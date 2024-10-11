@@ -280,7 +280,12 @@ function onScanSuccess(decodedText, decodedResult) {
 function scanQRCode() {
     html5QrcodeScanner = new Html5QrcodeScanner(
         "qr-reader",
-        { fps: 10, qrbox: {width: 250, height: 250} },
+        { fps: 10, 
+            qrbox: {width: 250, height: 250}, 
+            videoConstraints: {
+            facingMode: "environment"
+            }, 
+        },
         /* verbose= */ false);
     html5QrcodeScanner.render(onScanSuccess, onScanFailure);
 }
