@@ -15,6 +15,11 @@ function loadProject() {
     window.location = "project_list.html";
 }
 
+function loadLogin() {
+    window.location = "login.html";
+}
+
+
 const currentProjectName = window.localStorage.getItem("currentProjectName")
 if ( currentProjectName!= null) {
     var btn = document.getElementById("loadProjectBtn");
