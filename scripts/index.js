@@ -26,3 +26,6 @@ if ( currentProjectName!= null) {
     btn.disabled = false;
     btn.innerText = "Load " + currentProjectName + " Project"
 }
+
+var VERSION = "0.09"
+document.getElementById('version-string').innerText = VERSION;
