@@ -278,6 +278,7 @@ function onScanSuccess(decodedText, decodedResult) {
   }
    
 function scanQRCode() {
+    document.getElementById("reader-div").scrollIntoView();
     html5QrcodeScanner = new Html5QrcodeScanner(
         "qr-reader",
         { fps: 10, 
@@ -287,6 +288,7 @@ function scanQRCode() {
             }, 
         },
         /* verbose= */ false);
+
     html5QrcodeScanner.render(onScanSuccess, onScanFailure);
 }
 
