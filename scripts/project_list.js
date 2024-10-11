@@ -60,3 +60,15 @@ function filterFunction() {
     selectProject.innerHTML = '';
     displayList.forEach(p => selectProject.appendChild(new Option(p[0],p[0])))
 }
+
+function deleteProject() {
+    var selectedProject = document.getElementById("project-list").value;
+
+    if (selectedProject != null) {
+        // confirm that they really want to delete
+        var response = confirm("Delete. Are you Sure?");
+        if (response) {
+            window.localStorage.removeItem(selectedProject)
+        }
+    }
+}
