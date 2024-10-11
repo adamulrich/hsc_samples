@@ -70,5 +70,6 @@ function deleteProject() {
         if (response) {
             window.localStorage.removeItem(selectedProject)
         }
+        loadProjectList();
     }
 }
