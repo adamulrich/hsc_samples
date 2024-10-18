@@ -147,10 +147,11 @@ function createUpdateRow(newSample, location = -1) {
     // edit/delete buttons
     var editCell = newRow.insertCell(4);
     editCell.innerHTML=`
-    <input type="button" class="edit_btn" value="✏️" onclick="editRow(this)">`
-    var deleteCell = newRow.insertCell(5);
-    deleteCell.innerHTML=`
-    <input type="button" class="edit_btn" value="🗑️" onclick="deleteRow(this)">`
+    <input type="button" class="edit-btn" value="✏️" onclick="editRow(this)">
+    <br>
+    <input type="button" class="edit-btn" value="🗑️" onclick="deleteRow(this)">`
+    // var deleteCell = newRow.insertCell(5);
+    // deleteCell.innerHTML=`
     
 }
 
