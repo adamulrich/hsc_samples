@@ -158,7 +158,7 @@ function createUpdateRow(newSample, location = -1) {
 function editRow(r) {
     tableRowEditIndex = r.parentNode.parentNode.rowIndex -1 ;
     addNewSample(currentData.samples[tableRowEditIndex]);
-
+    scrollToMyRef("sample1-id");
 }
 
 function deleteRow(r) {
@@ -296,3 +296,13 @@ function scanQRCode() {
 function createReport() {
      window.location = "report.html?project=" + currentData.project;
 }
+
+scrollToMyRef = (id) => {
+    var ref = document.getElementById(id);
+    setTimeout(function () {
+         ref.scrollIntoView({
+             behavior: "smooth",
+             block: "start",
+         });
+    }, 100);
+};
