@@ -35,7 +35,7 @@ async function syncDataToCloud() {
             var p = new projects_template();
 
             // if the project has an objectID, set it to update the item.
-            if (project.objectId != "" ){
+            if (project.objectId != null ){
                 p.set("objectId", project.objectId);
             }
 
@@ -95,16 +95,17 @@ async function syncDataToCloud() {
             var temp = JSON.parse(r.get("data"));
             temp.objectId = r.id;
 
-            // put into localStorage
-            window.localStorage.setItem(r.get("project"),JSON.stringify(temp));
-
-        
-            
+            // put into localStorage if current user project
+            if (r.get("user_name") == userName) {
+                window.localStorage.setItem(r.get("project"),JSON.stringify(temp));
+            }
+                   
         }
         document.getElementById("result-text").innerText = "cloud sync completed";
 
 
     } catch (error) {
+        console.log(error)
         document.getElementById("result-text").innerText = "cloud sync not successful";
     }
    

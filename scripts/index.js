@@ -27,5 +27,5 @@ if ( currentProjectName!= null) {
     btn.innerText = "Load " + currentProjectName + " Project"
 }
 
-var VERSION = "0.10"
+var VERSION = "0.11"
 document.getElementById('version-string').innerText = VERSION;
