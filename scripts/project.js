@@ -178,21 +178,59 @@ function updateAnalyses(value) {
     select.style.display = "none";
     select.style.display = "block";
     var count = 0;
-    var currentItem;
     for (i of select.children) {
         i.checked = false;
         if (i.className == value) {
             i.style.display = "block";
             count++;
-            currentItem = i;
             
         } else {
             i.style.display = "none";
         }
     }
-    if (count == 1) {
-        currentItem.selected = true;
+    setDefaultValues()
+}
+
+
+function setDefaultValues() {
+
+    const badgeListDefaults = {
+        "581-571-Aldehyde":[
+            "Formaldehyde (50-0-0)"
+        ],
+        "574A-Halogenated-Gases": [
+            "Sevoflurane – (28523-86-6)",
+            "Isoflurane – (26675-46-7)",
+            "Desflurane – (57041-67-5)"
+        ],
+        "546-Organic-Vapor": [
+            "Acetone",
+            "Xylene",
+            "Methanol",
+            "Ethanol"
+        ],
+        "543A-Acetic-Acid": [
+            "Acetic Acid - (64-19-7)"
+        ],
+        "587-Hydrogen-Peroxide": [
+            "Hydrogen Peroxide - (7722-84-1)"
+        ],
+        "575D-Nitrous-Oxide": [
+            "Nitrous Oxide – (10024-97-2)"
+        ]
     }
+
+    // get current badge type
+    currentBadge = document.getElementById("sample1-type").value;
+    const analysesSelect = document.getElementById("sample1-analyses");
+
+    // set default values
+    for (i of analysesSelect.children) {
+        if (badgeListDefaults[currentBadge].includes(i.value)) {
+            i.selected = true;
+        }
+    }
+
 }
 
 // save data to local storage
