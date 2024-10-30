@@ -1,0 +1,21 @@
+obs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Calculate Lines of Code
+        id: loc
+        uses: PavanMudigonda/lines-of-code-reporter@v1.6
+        with:
+          include_lang: "JavaScript, CSS, HTML"
+          exclude_dir: ".github,html_to_pdf_example,parse_example,qr_code_example,styles/external,scripts/external"
+
+      # Publish Lines of Code Summary  # Optional
+     - name: Add Lines of Code Summary
+       run: echo "${{ steps.loc.outputs.lines-of-code-summary }}" >> $GITHUB_STEP_SUMMARY
+
+      - name: print output # Optional
+        shell: pwsh
+        run: | 
+          Write-Host 'Total Lines of Code...:  ${{ steps.loc.outputs.total_lines }}'
+          Write-Host 'Lines of Code Markdown Report Path...:  ${{ steps.loc.outputs.loc_report }}' 
+          
