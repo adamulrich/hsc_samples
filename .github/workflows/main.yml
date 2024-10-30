@@ -1,5 +1,3 @@
-name: Line of code metrics
-
 jobs:
   build:
     name: Line of code metrics
