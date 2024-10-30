@@ -7,6 +7,7 @@
     <!-- <link rel="stylesheet" href="styles/bootstrap.min.css"> -->
     <!-- <script src="scripts/bootstrap.min.js"></script>     -->
     <script src="scripts/report.js" defer></script>
+    <script src="scripts/tableToExcel.js"></script>
     <link rel="stylesheet" href="styles/report.css">
 
 </head>
@@ -14,202 +15,293 @@
 <body>
     <button class='btn btn-success' onclick="addRowsAndPrint()">Save Report</button>
     <button class='btn btn-primary' onclick="window.location = 'index.html'">Main Menu</button>
+    <button class='btn btn-secondary' onclick="createExcel()">Create Excel</button>
     <main id="main">
-        <table id="report-table">
+        <table id="report-table" data-cols-width="30,20,30,20,15,10,10,10,10,50">
 
             <tr>
                 <td colspan="6"><img src="images/at_labs.png" style="width: 500px;"></td>
-                <td colspan="3"><img src="images/service_authorized.png"></td>
+                <td colspan="4"><img src="images/service_authorized.png"></td>
             </tr>
             <!-- first row header table -->
-            <tr>
-                <td colspan="2" class="table-box">
+            <tr >
+                <td class="table-box-top" data-a-wrap="true" colspan="3" data-f-bold="true" data-b-t-s='thin' data-b-l-s='thin'>
                     <p class="table-header" >Purchase Order or Credit Card Type</p>
-                    <p class="table-data">&nbsp</p>
                 </td>
-                <td colspan="2">
+                <td class="table-box-top" colspan="3" data-f-bold="true" data-b-t-s="thin">
                     <p class="table-data">Assay Contact # 46420</p>
-                    <p class="table-data">Send Lab Report To:</p>
                 </td>
-                <td colspan="4">
+                <td class="table-box-top" colspan="4" data-f-bold="true" data-b-t-s="thin" data-b-r-s='thin'>
                     <p class="table-data">Sent Invoice To:</p>
                 </td>
             </tr>
+            <tr>
+                <td class="table-box-bottom" data-a-wrap="true" colspan="3" data-b-l-s="thine">
+                </td>
+                <td  class="table-box-bottom" colspan="3" data-f-bold="true">
+                    <p class="table-data">Send Lab Report To:</p>
+                </td>
+                <td  class="table-box-bottom" colspan="4" data-f-bold="true" data-b-r-s="thin">
+                </td>
+            </tr>
+
             <!-- second row header table -->
             <tr>
-                <td colspan="2" class="table-box">
+                <td colspan="3" class="table-box-top" data-f-bold="true" data-b-l-s="thin">
                     <p class="table-header" >Project Name or No.</p>
+                </td>
+                <td colspan="3" class="table-box-top" data-f-bold="true">
+                    <p class="table-data">Name</p>
+                </td>
+                <td colspan="4" class="table-box-top" data-f-bold="true" data-b-r-s="thin">
+                    <p class="table-data">Name</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" class="table-box-bottom" data-b-l-s="thin">
                     <p class="table-data" id="project-name">&nbsp</p>
                 </td>
-                <td colspan="2" class="table-box">
-                    <p class="table-data">Name</p>
+                <td colspan="3" class="table-box-bottom">
                     <p class="table-data" id="companydata-name">&nbsp</p>
                 </td>
-                <td colspan="4" class="table-box">
-                    <p class="table-data">Name</p>
-                    <p class="table-data">&nbsp</p>
+                <td colspan="4" class="table-box-bottom" data-b-r-s="thin">
+                
                 </td>
             </tr>
+
             <!-- third row header table -->
             <tr>
-                <td colspan="2" class="table-box">
+                <td colspan="3" class="table-box-top" data-f-bold="true" data-b-l-s="thin">
                     <p class="table-header" >Client Email</p>
+                </td>
+                <td colspan="3" class="table-box-top" data-f-bold="true">
+                    <p class="table-data">Company/Organization</p>
+                </td>
+                <td colspan="4" class="table-box-top" data-f-bold="true" data-b-r-s="thin">
+                    <p class="table-data">Company/Organization</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" class="table-box-bottom" data-b-l-s="thin">
                     <p class="table-data" id="companydata-email">&nbsp</p>
                 </td>
-                <td colspan="2" class="table-box">
-                    <p class="table-data">Company/Organization</p>
+                <td colspan="3" class="table-box-bottom">
                     <p class="table-data" id="companydata-company">&nbsp</p>
                 </td>
-                <td colspan="4" class="table-box">
-                    <p class="table-data">Company/Organization</p>
+                <td colspan="4" class="table-box-bottom" data-b-r-s="thin">
                     <p class="table-data">&nbsp</p>
                 </td>
             </tr>
+
             <!-- fourth row header table -->
             <tr>
-                <td colspan="2" class="table-box">
+                <td colspan="3" class="table-box-top" data-f-bold="true" data-b-l-s="thin">
                     <p class="table-header">Client Phone</p>
+                </td>
+                <td colspan="3" class="table-box-top" data-f-bold="true">
+                    <p class="table-data">Address</p>
+                </td>
+                <td colspan="4" class="table-box-top" data-f-bold="true" data-b-r-s="thin">
+                    <p class="table-data">Address</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" class="table-box-bottom" data-b-l-s="thin">
                     <p class="table-data" id="companydata-phone">placeholder</p>
                 </td>
-                <td colspan="2" class="table-box">
-                    <p class="table-data">Address</p>
+                <td colspan="3" class="table-box-bottom">
                     <p class="table-data" id="companydata-address">placeholder</p>
                 </td>
-                <td colspan="4" class="table-box">
-                    <p class="table-data">Address</p>
+                <td colspan="4" class="table-box-bottom" data-b-r-s="thin">
                     <p class="table-data">&nbsp</p>
                 </td>
             </tr>
+
             <!-- fifth row header table -->
             <tr>
-                <td colspan="2" class="table-box">
+                <td colspan="3" class="table-box-top" data-f-bold="true" data-b-l-s="thin">
                     <p class="table-header">Client Fax</p>
-                    <p class="table-data">&nbsp</p>
                 </td>
-                <td colspan="2" class="table-box">
+                <td colspan="3" class="table-box-top" data-f-bold="true">
                     <p class="table-data">City, State, ZIP</p>
-                    <p class="table-data" id="companydata-city-state-zip">placeholder</p>
                 </td>
-                <td colspan="4" class="table-box">
+                <td colspan="4" class="table-box-top" data-f-bold="true" data-b-r-s="thin">
                     <p class="table-data">City, State, ZIP</p>
-                    <p class="table-data">&nbsp</p>
                 </td>
             </tr>
             <tr>
-                <td colspan="1" class="table-box">
-                    <p class="table-header-bold">LAB SAMPLE</p>
-                    <p class="table-header-bold">ID NO</p>
+                <td colspan="3" class="table-box-bottom" data-b-l-s="thin"  data-b-b-s="thin">
+                    <p class="table-data">&nbsp</p>
                 </td>
-                <td colspan="2" class="table-box">
+                <td colspan="3" class="table-box-bottom" data-b-b-s="thin">
+                    <p class="table-data" id="companydata-city-state-zip">placeholder</p>
+                </td>
+                <td colspan="4" class="table-box-bottom" data-b-r-s="thin" data-b-b-s="thin">
+                    <p class="table-data">&nbsp</p>
+                </td>
+            </tr>
+            <tr></tr>
+            <tr> 
+                <td colspan="1" class="table-box-top" data-f-bold="true" data-b-l-s="medium"  data-b-t-s="medium"  data-b-r-s="medium">
+                    <p class="table-header-bold">LAB SAMPLE</p>
+                </td>
+                <td colspan="2" class="table-box-top" data-f-bold="true" data-b-l-s="medium"  data-b-t-s="medium"  data-b-r-s="medium">
                     <p class="table-header-bold">CLIENT SAMPLE ID</p>
                 </td>
-                <td colspan="1" class="table-box">
+                <td colspan="1" class="table-box-top" data-f-bold="true" data-b-l-s="medium"  data-b-t-s="medium"  data-b-r-s="medium">
                     <p class="table-header-bold">MEDIA TYPE/</p>
-                    <p class="table-header-bold">SERIAL NO</p>
                 </td>
-                <td colspan="1" class="table-box">
+                <td colspan="1" class="table-box-top" data-f-bold="true" data-b-l-s="medium"  data-b-t-s="medium"  data-b-r-s="medium">
                     <p class="table-header-bold">DATE</p>
-                    <p class="table-header-bold">SAMPLED</p>
                 </td>
-                <td colspan="1" class="table-box">
+                <td colspan="1" class="table-box-top" data-f-bold="true" data-b-l-s="medium"  data-b-t-s="medium"  data-b-r-s="medium">
                     <p class="table-header-bold">START</p>
-                    <p class="table-header-bold">TIME</p>
                 </td>
-                <td colspan="1" class="table-box">
+                <td colspan="1" class="table-box-top" data-f-bold="true" data-b-l-s="medium"  data-b-t-s="medium"  data-b-r-s="medium">
                     <p class="table-header-bold">STOP</p>
-                    <p class="table-header-bold">TIME</p>
                 </td>
-                <td colspan="1" class="table-box">
+                <td colspan="1" class="table-box-top" data-f-bold="true" data-b-l-s="medium"  data-b-t-s="medium"  data-b-r-s="medium">
                     <p class="table-header-bold">TOTAL</p>
-                    <p class="table-header-bold">TIME</p>
                 </td>
-                <td colspan="1" class="table-box">
+                <td colspan="2" class="table-box-top" data-f-bold="true" data-b-l-s="medium"  data-b-t-s="medium"  data-b-r-s="medium">
                     <p class="table-header-bold">ANALYSES/TESTS REQUESTED</p>
                 </td>
             </tr>
-            <tr id="sample-data">
-                <td colspan="1" class="table-box">
+            <tr>
+                <td colspan="1" class="table-box-bottom" data-f-bold="true" data-b-l-s="medium"  data-b-b-s="medium"  data-b-r-s="medium">
+                    <p class="table-header-bold">ID NO</p>
                 </td>
-                <td colspan="2" class="table-box">
+                <td colspan="2" class="table-box-bottom" data-f-bold="true" data-b-l-s="medium"  data-b-b-s="medium"  data-b-r-s="medium">
+            
+                </td>
+                <td colspan="1" class="table-box-bottom" data-f-bold="true" data-b-l-s="medium"  data-b-b-s="medium"  data-b-r-s="medium">
+                    <p class="table-header-bold">SERIAL NO</p>
+                </td>
+                <td colspan="1" class="table-box-bottom" data-f-bold="true" data-b-l-s="medium"  data-b-b-s="medium"  data-b-r-s="medium">
+                    <p class="table-header-bold">SAMPLED</p>
+                </td>
+                <td colspan="1" class="table-box-bottom" data-f-bold="true" data-b-l-s="medium"  data-b-b-s="medium"  data-b-r-s="medium">
+                    <p class="table-header-bold">TIME</p>
+                </td>
+                <td colspan="1" class="table-box-bottom" data-f-bold="true" data-b-l-s="medium"  data-b-b-s="medium"  data-b-r-s="medium">
+                    <p class="table-header-bold">TIME</p>
+                </td>
+                <td colspan="1" class="table-box-bottom" data-f-bold="true" data-b-l-s="medium"  data-b-b-s="medium"  data-b-r-s="medium">
+                    <p class="table-header-bold">TIME</p>
+                </td>
+                <td colspan="2" class="table-box-bottom" data-f-bold="true" data-b-l-s="medium"  data-b-b-s="medium"  data-b-r-s="medium">
+                </td>
+            </tr>
+            <tr></tr>
+            <tr id="sample-data">
+                <td colspan="1" class="table-box" data-b-a-s='thin'>
+                </td>
+                <td colspan="2" class="table-box" data-b-a-s='thin'>
                     <p class="table-data" id="sample-id">placeholder</p>
                 </td>
-                <td colspan="1" class="table-box">
+                <td colspan="1" class="table-box" data-b-a-s='thin'>
                     <p class="table-data" id="sample-media-type">placeholder</p>
                     <p class="table-data" id="sample-serial-number">placeholder</p>
                 </td>
-                <td colspan="1" class="table-box">
+                <td colspan="1" class="table-box" data-b-a-s='thin'>
                     <p class="table-data" id="sample-date">placeholder</p>
                 </td>
-                <td colspan="1" class="table-box">
+                <td colspan="1" class="table-box" data-b-a-s='thin'>
                 </td>
-                <td colspan="1" class="table-box">
+                <td colspan="1" class="table-box" data-b-a-s='thin'>
                 </td>
-                <td colspan="1" class="table-box">
+                <td colspan="1" class="table-box" data-b-a-s='thin'>
                     <p class="table-data" id="sample-total-time">placeholder</p>
                 </td>
-                <td colspan="1" class="table-box" id="sample-tests">
+                <td colspan="2" class="table-box" id="sample-tests"  data-b-a-s='thin'>
                 </td>
             </tr>
+            <tr></tr>
             <tr>
-                <td colspan="9">
+                <td colspan="10" data-f-bold="true">
                     <p class="center-italic">Chain of Custody</p>
                 </td>
             </tr>
 
             <tr>
-                <td class="table-box" colspan="3" rowspan="3" style="max-width: 140px;">
+                <td data-a-wrap='true' class="table-box" colspan="3" rowspan="6" style="max-width: 140px;" data-b-a-s="thin">
                     <p class="table-data">Assay Technology(AT Labs) operates two separate Labs
                     (No 101728 in Livermore, CA and No 100903 in Boardman, OH)
                     each accredited by AIHA. By completing this Lab Request
                     Form, you are agreeing that your samples may be analyzed,
                     at Assay Technology's discretion, in either of our labs</p>
                 </td>
-                <td class="table-box" colspan="3">
+                <td class="table-box" colspan="2" data-f-bold="true" data-b-t-s="thin" data-b-l-s="thin" data-b-r-s="thin">
                     <p class="table-custody">Sampled By
-                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                        Date
-                    <p>
+                    </p>
                 </td>
-                <td class="table-box" colspan="3">
+                <td class="table-box" colspan="1" data-f-bold="true" data-b-t-s="thin" data-b-l-s="thin" data-b-r-s="thin">
+                    <p class="table-custody">date
+                    </p>
+                </td>
+
+                <td class="table-box" colspan="3" data-f-bold="true" data-b-t-s="thin" data-b-l-s="thin" data-b-r-s="thin">
                     <p class="table-custody">Shipment Method By
-                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                        &nbsp&nbsp&nbsp&nbsp&nbsp
-                        Date
+                    </p>
+                </td>
+                <td class="table-box" colspan="1" data-f-bold="true" data-b-t-s="thin" data-b-l-s="thin" data-b-r-s="thin">
+                    <p class="table-custody">date
                     </p>
                 </td>
             </tr>
             <tr>
-                <td class="table-box" colspan="3">
+                <td colspan="2" data-b-b-s="thin" data-b-l-s="thin" data-b-r-s="thin"></td>
+                <td colspan="1" data-b-b-s="thin" data-b-l-s="thin" data-b-r-s="thin"></td>
+                <td colspan="3" data-b-b-s="thin" data-b-l-s="thin" data-b-r-s="thin"></td>
+                <td colspan="1" data-b-b-s="thin" data-b-l-s="thin" data-b-r-s="thin"></td>
+            </tr>
+            <tr>
+                <td class="table-box" colspan="2" data-f-bold="true" data-b-t-s="thin" data-b-l-s="thin" data-b-r-s="thin">
                     <p class="table-custody">Relinquished By
-                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                        &nbsp&nbsp&nbsp&nbsp&nbsp
-                        Date
                     </p>
                 </td>
-                <td class="table-box" colspan="3">
+                <td class="table-box" colspan="1" data-f-bold="true" data-b-t-s="thin" data-b-l-s="thin" data-b-r-s="thin">
+                    <p class="table-custody">date
+                    </p>
+                </td>
+                <td class="table-box" colspan="3" data-f-bold="true" data-b-t-s="thin" data-b-l-s="thin" data-b-r-s="thin">
                     <p class="table-custody">Received By
-                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                        Date
+                    </p>
+                </td>
+                <td class="table-box" colspan="1" data-f-bold="true" data-b-t-s="thin" data-b-l-s="thin" data-b-r-s="thin">
+                    <p class="table-custody">date
                     </p>
                 </td>
             </tr>
             <tr>
-                <td class="table-box" colspan="3">
+                <td colspan="2" data-b-b-s="thin" data-b-l-s="thin" data-b-r-s="thin"></td>
+                <td colspan="1" data-b-b-s="thin" data-b-l-s="thin" data-b-r-s="thin"></td>
+                <td colspan="3" data-b-b-s="thin" data-b-l-s="thin" data-b-r-s="thin"></td>
+                <td colspan="1" data-b-b-s="thin" data-b-l-s="thin" data-b-r-s="thin"></td>
+            </tr>
+            <tr>
+                <td class="table-box" colspan="2" data-f-bold="true" data-b-t-s="thin" data-b-l-s="thin" data-b-r-s="thin">
                     <p class="table-custody">Relinquished By
-                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                        &nbsp&nbsp&nbsp&nbsp&nbsp
-                        Date
                     </p>
                 </td>
-                <td class="table-box" colspan="3">
+                <td class="table-box" colspan="1" data-f-bold="true" data-b-t-s="thin" data-b-l-s="thin" data-b-r-s="thin">
+                    <p class="table-custody">date
+                    </p>
+                </td>
+                <td class="table-box" colspan="3" data-f-bold="true" data-b-t-s="thin" data-b-l-s="thin" data-b-r-s="thin">
                     <p class="table-custody">Received By LAB
-                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                        Date
                     </p>
                 </td>
+                <td class="table-box" colspan="1" data-f-bold="true" data-b-t-s="thin" data-b-l-s="thin" data-b-r-s="thin">
+                    <p class="table-custody">date
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" data-b-b-s="thin" data-b-l-s="thin" data-b-r-s="thin"></td>
+                <td colspan="1" data-b-b-s="thin" data-b-l-s="thin" data-b-r-s="thin"></td>
+                <td colspan="3" data-b-b-s="thin" data-b-l-s="thin" data-b-r-s="thin"></td>
+                <td colspan="1" data-b-b-s="thin" data-b-l-s="thin" data-b-r-s="thin"></td>
             </tr>
         </table>
     </main>

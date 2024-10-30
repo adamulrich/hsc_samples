@@ -27,12 +27,13 @@ function loadData() {
     var mainTable = document.getElementById('report-table');
     var tbody = mainTable.children[0]; // or to use HTMLTableElement, mainTable.tBodies[0]
     var insertedRow;
-    var i = 7;
+    const templateRow = 15;
+    var i = templateRow;
 
     // add each row
     currentData.samples.forEach(sample => {
         i++;
-        insertedRow = tbody.insertBefore(mainTable.rows[7].cloneNode(true), mainTable.rows[i]);
+        insertedRow = tbody.insertBefore(mainTable.rows[templateRow].cloneNode(true), mainTable.rows[i]);
         insertedRow.querySelector("#sample-id").innerText = sample.id;
         insertedRow.querySelector("#sample-media-type").innerText = sample.type;
         insertedRow.querySelector("#sample-serial-number").innerText = sample.serialNumber;
@@ -41,11 +42,19 @@ function loadData() {
 
         // add analyses
         sample.analyses.forEach(test => {
-            insertedRow.querySelector("#sample-tests").innerHTML +='<p class="table-data" id="sample-test-1">' + test + '</p>'
+            insertedRow.querySelector("#sample-tests").innerHTML +='<p class="table-data" id="sample-test-1"> ' + test + ' /</p>'
         })    
     });
 
-mainTable.deleteRow(7);
-
-
+    mainTable.deleteRow(templateRow);
 }
+
+function createExcel() {
+    TableToExcel.convert(document.getElementById("report-table"), {
+        name: currentData.project + ".xlsx",
+        sheet: {
+          name: "Sheet 1"
+        }
+      });
+}
+

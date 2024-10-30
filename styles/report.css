@@ -2,6 +2,18 @@
     border: 1px solid black;
 }
 
+.table-box-top {
+    border: 1px solid black;
+    border-bottom: none;
+    font-weight: bold;
+}
+
+.table-box-bottom {
+    border: 1px solid black;
+    border-top: none
+}
+
+
 .table-header {
     font-size: 8px;
     padding: 0px;
