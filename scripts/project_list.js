@@ -38,7 +38,7 @@ function selectProject() {
     var selectedProject = document.getElementById("project-list").value;
 
     if (selectedProject != null) {
-        window.location = "project.html?project=" + selectedProject;
+        window.location = "project.html?project=" + encodeURIComponent(selectedProject);
     }
 }
 
@@ -66,7 +66,7 @@ function deleteProject() {
 
     if (selectedProject != null) {
         // confirm that they really want to delete
-        var response = confirm("Delete " + selectedProject + ". Are you Sure?");
+        var response = confirm("Delete '" + selectedProject + "'. Are you Sure?");
         if (response) {
             var objectId = JSON.parse(window.localStorage.getItem(selectedProject)).objectId;
             window.localStorage.removeItem(selectedProject)
