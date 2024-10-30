@@ -1,4 +1,5 @@
 function addRowsAndPrint() {
+    document.title = document.getElementById("project-name").innerText;
     window.print();
 }
 

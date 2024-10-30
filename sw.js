@@ -8,7 +8,7 @@ var APP_PREFIX = 'hscpwa_';
 // you need to change this version (version_01, version_02…). 
 // If you don't change the version, the service worker will give your
 // users the old files!
-var VERSION = 'version_18';
+var VERSION = 'version_19';
  
 // The files to make available for offline use. make sure to add 
 // others to this list
@@ -19,16 +19,16 @@ var URLS = [
   `${GHPATH}/images/searchicon.png`,
   `${GHPATH}/images/service_authorized.png`,
   `${GHPATH}/scripts/admin.js`,
-  `${GHPATH}/scripts/bootstrap.min.js`,
-  `${GHPATH}/scripts/html5-qrcode.min.js`,
+  `${GHPATH}/scripts/external/bootstrap.min.js`,
+  `${GHPATH}/scripts/external/html5-qrcode.min.js`,
+  `${GHPATH}/scripts/external/parse.min.js`,
   `${GHPATH}/scripts/index.js`,
   `${GHPATH}/scripts/login.js`,
-  `${GHPATH}/scripts/parse.min.js`,
   `${GHPATH}/scripts/project_list.js`,
   `${GHPATH}/scripts/project.js`,
   `${GHPATH}/scripts/report.js`,
   `${GHPATH}/scripts/tableToExcel.js`,
-  `${GHPATH}/styles/bootstrap.min.css`,
+  `${GHPATH}/styles/external/bootstrap.min.css`,
   `${GHPATH}/styles/project.css`,
   `${GHPATH}/styles/report.css`,
   `${GHPATH}/styles/style.css`,

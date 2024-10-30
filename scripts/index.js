@@ -27,5 +27,18 @@ if ( currentProjectName!= null) {
     btn.innerText = "Load " + currentProjectName + " Project"
 }
 
-var VERSION = "0.18"
+if (window.localStorage.getItem("companyData") == null) {
+    companyData = {}
+    companyData.name = "AWP"
+    companyData.email = "awprince@healthandsafetyinc.com"
+    companyData.company = "Health and Safety Compliance"
+    companyData.address = "2377 Gold Meadow Way, #100"
+    companyData.city = "Gold River"
+    companyData.state = "CA"
+    companyData.zip = "95670"
+    companyData.phone = "(916) 284-6256"
+    window.localStorage.setItem("companyData",JSON.stringify(companyData));
+}
+
+var VERSION = "0.19"
 document.getElementById('version-string').innerText = VERSION;
