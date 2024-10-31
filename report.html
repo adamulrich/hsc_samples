@@ -15,7 +15,7 @@
     <button class='btn btn-primary' onclick="window.location = 'index.html'">Main Menu</button>
     <button class='btn btn-secondary' onclick="createExcel()">Create Excel</button>
     <main id="main">
-        <table id="report-table" data-cols-width="30,20,30,20,15,10,10,10,10,50">
+        <table id="report-table" data-cols-width="30,10,10,40,15,10,10,10,10,50">
 
             <tr>
                 <td colspan="6"><img src="images/at_labs.png" style="width: 500px;"></td>
@@ -191,13 +191,13 @@
                 </td>
             </tr>
             <tr></tr>
-            <tr id="sample-data">
+            <tr id="sample-data" data-height="42.5">
                 <td colspan="1" class="table-box" data-b-a-s='thin'>
                 </td>
                 <td colspan="2" class="table-box" data-b-a-s='thin'>
                     <p class="table-data" id="sample-id">placeholder</p>
                 </td>
-                <td colspan="1" class="table-box" data-b-a-s='thin'>
+                <td colspan="1" class="table-box" data-a-wrap='true' data-b-a-s='thin'>
                     <p class="table-data" id="sample-media-type">placeholder</p>
                     <p class="table-data" id="sample-serial-number">placeholder</p>
                 </td>
@@ -211,7 +211,7 @@
                 <td colspan="1" class="table-box" data-b-a-s='thin'>
                     <p class="table-data" id="sample-total-time">placeholder</p>
                 </td>
-                <td colspan="2" class="table-box" id="sample-tests"  data-b-a-s='thin'>
+                <td colspan="2" class="table-box" id="sample-tests" data-a-wrap='true' data-b-a-s='thin'>
                 </td>
             </tr>
             <tr></tr>

@@ -36,7 +36,7 @@ function loadData() {
         i++;
         insertedRow = tbody.insertBefore(mainTable.rows[templateRow].cloneNode(true), mainTable.rows[i]);
         insertedRow.querySelector("#sample-id").innerText = sample.id;
-        insertedRow.querySelector("#sample-media-type").innerText = sample.type;
+        insertedRow.querySelector("#sample-media-type").innerText = sample.type + " / ";
         insertedRow.querySelector("#sample-serial-number").innerText = sample.serialNumber;
         insertedRow.querySelector("#sample-date").innerText = sample.date;
         insertedRow.querySelector("#sample-total-time").innerText = sample.duration;
@@ -56,6 +56,9 @@ function createExcel() {
         sheet: {
           name: "Sheet 1"
         }
+        
       });
+      console.log(JSON.stringify(currentData));
+      console.log(JSON.stringify(companyData));
 }
 
