@@ -320,11 +320,12 @@ function scanQRCode() {
     document.getElementById("reader-div").scrollIntoView();
     html5QrcodeScanner = new Html5QrcodeScanner(
         "qr-reader",
-        { fps: 4, 
-            qrbox: {width: 250, height: 250}, 
-            videoConstraints: {
-            facingMode: "environment"
-            }, 
+        { fps: 10, 
+            qrbox: {width: 250, height: 250}
+             
+            // , videoConstraints: {
+            // facingMode: "environment"
+            // }, 
         },
         /* verbose= */ false);
 

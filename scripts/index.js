@@ -40,5 +40,5 @@ if (window.localStorage.getItem("companyData") == null) {
     window.localStorage.setItem("companyData",JSON.stringify(companyData));
 }
 
-var VERSION = "0.22"
+var VERSION = "0.23"
 document.getElementById('version-string').innerText = VERSION;
