@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script type="text/javascript" src="../scripts/parse.min.js"></script>
+    <script type="text/javascript" src="../scripts/external/parse.min.js"></script>
 
     <script>
         // Initialize Parse
@@ -82,9 +82,9 @@
             // Creates a new Parse "User" object, which is created by default in your Parse app
             let user = new Parse.User();
             // Set the input values to the new "User" object
-            user.set("username", "natasha");
-            user.set("email", "natasha@healthandsafetyinc.com");
-            user.set("password", 'hsc_natasha');
+            user.set("username", "zoe");
+            user.set("email", "zoe@healthandsafetyinc.com");
+            user.set("password", 'hsc_zoe');
             // Call the save method, which returns the saved object if successful
             user = await user.save();
 
